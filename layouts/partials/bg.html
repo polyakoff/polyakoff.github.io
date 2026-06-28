@@ -138,10 +138,13 @@
         }, i*(450+Math.random()*550)); })(i);
       }
     }
-    function sched(){ setTimeout(function(){ if(!isNight && !document.hidden) flight(); sched(); }, 13000+Math.random()*19000); }
-    // on hide, drop active gulls + cancel rAF so none are frozen and replayed when the tab returns
-    document.addEventListener('visibilitychange',function(){ if(document.hidden){ for(var i=0;i<active.length;i++) active[i].el.remove(); active.length=0; if(raf){cancelAnimationFrame(raf);raf=null;} } });
-    sched();
+    var schedT;
+    function sched(d){ clearTimeout(schedT); schedT=setTimeout(function(){ if(!isNight && !document.hidden) flight(); sched(10000+Math.random()*12000); }, d); }
+    document.addEventListener('visibilitychange',function(){
+      if(document.hidden){ for(var i=0;i<active.length;i++) active[i].el.remove(); active.length=0; if(raf){cancelAnimationFrame(raf);raf=null;} }
+      else { sched(1200+Math.random()*2300); }       // returning to the tab → bring a gull back soon
+    });
+    sched(2000+Math.random()*3000);                  // first gull a few seconds after load, then a calm cadence (10-22s)
   })();
 })();
 </script>
