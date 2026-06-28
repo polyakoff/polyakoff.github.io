@@ -105,7 +105,7 @@
         var x=g.x0+(g.x1-g.x0)*et;
         var wob=Math.sin(t*g.bn+g.bp);
         var y=g.y0+(g.y1-g.y0)*et + wob*g.amp;
-        var sc=g.base/(1+(g.base/0.03-1)*t);               // perspective shrink toward a ~dot
+        var sc=g.base*(1-0.96*Math.pow(t,2.2));            // stay large most of the flight, then recede to a ~dot near the end
         var op=t<0.05 ? t/0.05 : (t>0.9 ? (1-(t-0.9)/0.1) : 1);   // hold full, fade only once tiny
         var rot=g.rot + wob*2;
         g.el.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+') scale('+sc.toFixed(3)+') rotate('+rot.toFixed(2)+')');
@@ -128,7 +128,7 @@
       if(!raf) raf=requestAnimationFrame(tick);
     }
     function flight(){
-      var dir=Math.random()<0.5?1:-1, y0c=90+Math.random()*210, base=0.72+Math.random()*0.5;
+      var dir=Math.random()<0.5?1:-1, y0c=90+Math.random()*210, base=1.05+Math.random()*0.65;
       var r=Math.random(), n = r<0.43?1 : (r<0.85?2:3);
       n=Math.min(n, CAP-active.length); if(n<=0) return;
       for(var i=0;i<n;i++){
