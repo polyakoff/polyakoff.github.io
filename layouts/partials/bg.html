@@ -117,8 +117,9 @@
       var inst=document.createElementNS(SVGNS,'g'); inst.setAttribute('opacity','0');
       var inner=document.createElementNS(SVGNS,'g'); inner.setAttribute('transform','translate(-50 -14)');
       var art=proto.cloneNode(true); art.removeAttribute('id');
+      var fdur=(4.4+Math.random()*2.1).toFixed(2)+'s', fbeg=(-Math.random()*6).toFixed(2)+'s';   // one flap timing per gull so both wings stay in sync
       var ats=art.getElementsByTagName('animateTransform');
-      for(var j=0;j<ats.length;j++){ ats[j].setAttribute('dur',(4.4+Math.random()*2.1).toFixed(2)+'s'); ats[j].setAttribute('begin',(-Math.random()*6).toFixed(2)+'s'); }
+      for(var j=0;j<ats.length;j++){ ats[j].setAttribute('dur',fdur); ats[j].setAttribute('begin',fbeg); }
       inner.appendChild(art); inst.appendChild(inner); layer.appendChild(inst);
       var x0 = dir>0 ? -70 : 1670;
       active.push({el:inst,t0:performance.now(),dur:30000+Math.random()*18000,
