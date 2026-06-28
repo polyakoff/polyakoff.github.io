@@ -2,14 +2,7 @@
 
 Двомовний (укр/англ) блог на Hugo. Деплой — GitHub Pages через GitHub Actions.
 
-## Як залити (один раз)
-1. У репозиторії `polyakoff/polyakoff.github.io` **видали старий** `index.html` (і старий звіт, якщо є).
-2. Поклади **весь вміст цього архіву в корінь репо** (щоб `hugo.toml` був у корені, поряд `.github/`, `content/`, `layouts/`, `static/`).
-3. GitHub → **Settings → Pages → Build and deployment → Source = GitHub Actions** (НЕ «Deploy from a branch»).
-4. Зроби commit у `main`. Вкладка **Actions** збере сайт Hugo і задеплоїть (чекай зелену галочку).
-5. **Custom domain** лишається `artem.im` (файл `static/CNAME` його тримає). Увімкни **Enforce HTTPS**.
-
-## Як додати новий пост (без мене)
+## Як додати новий пост
 - Створи теку `content/blog/назва-поста/` і в ній `index.uk.md` (і за бажанням `index.en.md`).
 - Front matter + текст у Markdown:
   ```
@@ -27,7 +20,7 @@
 ## Локальний перегляд (необов'язково)
 Встанови Hugo extended і запусти `hugo server` у теці проєкту → http://localhost:1313
 
-## Що вже налаштовано
+## Вже налаштовано
 - Двомовність uk/en (перемикач у меню), ліве дерево-меню → бургер на мобільному.
 - SEO: sitemap.xml, robots.txt, RSS, canonical, hreflang, Open Graph.
 - Лічильник GoatCounter (poliakoff.goatcounter.com) — рахує лише на проді.
