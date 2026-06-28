@@ -1,0 +1,14 @@
+{{- $p := . -}}
+<div class="lang">
+{{- range .Sites -}}
+  {{- $lang := .Language -}}
+  {{- $label := cond (eq .Language.Lang "uk") "UA" "EN" -}}
+  {{- if eq .Language.Lang $p.Site.Language.Lang -}}
+    <a class="on" href="{{ $p.RelPermalink }}">{{ $label }}</a>
+  {{- else -}}
+    {{- $href := cond (eq .Language.Lang "uk") "/" (printf "/%s/" .Language.Lang) -}}
+    {{- range $p.Translations -}}{{- if eq .Site.Language.Lang $lang.Lang -}}{{- $href = .RelPermalink -}}{{- end -}}{{- end -}}
+    <a href="{{ $href }}">{{ $label }}</a>
+  {{- end -}}
+{{- end -}}
+</div>

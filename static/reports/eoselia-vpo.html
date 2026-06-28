@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Житло для ВПО — Київ: лотерея 3% і єОселя</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800&family=Commissioner:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:rgba(255,255,255,.05);--card:rgba(255,255,255,.07);--ink:#e7eef7;--ink-soft:#a2b6c8;--line:rgba(255,255,255,.14);
+ --petrol:#7cc3e8;--petrol-deep:#a6d4ef;--ochre:#6bb6dd;--clay:#ec9379;--sage:#74c9bf}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:transparent;color:var(--ink);font-family:'Commissioner',system-ui,sans-serif;
+ font-weight:400;line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:0 26px 8px}
+.m{font-family:'IBM Plex Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+.curbar{position:relative;z-index:50;background:transparent;border-bottom:1px solid var(--line);margin:0 0 8px}
+.curbar .ci{max-width:880px;margin:0 auto;padding:9px 26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.curbar .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.curbtns{display:inline-flex;border:1px solid var(--petrol);border-radius:8px;overflow:hidden}
+.curbtns button{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;border:none;background:transparent;color:var(--petrol);padding:6px 14px;cursor:pointer;border-right:1px solid var(--petrol)}
+.curbtns button:last-child{border-right:none}
+.curbtns button.on{background:var(--petrol);color:#0a2238}
+.curbar .rate{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin-left:auto}
+.hero{position:relative;margin:0 0 36px;padding:4px 26px 0;color:var(--ink)}
+.hero .grid-bg{display:none}
+.hero-inner{position:relative;max-width:880px;margin:0 auto}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:#8FD0EA;margin:0 0 18px}
+.hero h1{font-family:'Unbounded',sans-serif;font-weight:700;line-height:1.18;font-size:clamp(19px,3.2vw,26px);margin:0 0 14px;letter-spacing:-.005em}
+.hero h1 em{font-style:normal;color:#7CC9EC}
+.hero p.lede{font-size:18px;max-width:60ch;color:#CFE0DF;margin:0 0 28px}
+.params{display:flex;flex-wrap:wrap;gap:0}
+.param{flex:1 1 130px;padding:4px 20px;border-right:1px solid rgba(255,255,255,.16)}
+.param:first-child{padding-left:0}
+.param:last-child{border-right:none}
+.param .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8FD0EA;margin-bottom:5px}
+.param .v{font-family:'Unbounded',sans-serif;font-weight:700;font-size:20px;color:#fff}
+.param .v small{font-family:'Commissioner';font-weight:500;font-size:13px;color:#CFE0DF}
+.param .v .m{font-family:'Unbounded',sans-serif}
+section{margin:0 0 52px;scroll-margin-top:64px}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin:0 0 20px;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.sec-num{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;color:var(--petrol);padding-top:5px;white-space:nowrap}
+.sec-head h2{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(20px,3.3vw,26px);line-height:1.12;margin:0;letter-spacing:-.01em}
+h3{font-family:'Unbounded',sans-serif;font-weight:600;font-size:17px;margin:28px 0 10px;letter-spacing:-.005em}
+p{margin:0 0 14px;max-width:74ch}
+strong{font-weight:600}
+a{color:var(--petrol-deep);text-underline-offset:3px}
+.lead{font-size:18px}
+.muted{color:var(--ink-soft)}
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0 8px}
+.fcard{background:none;border:none;border-radius:0;border-left:2px solid var(--line);padding:2px 0 2px 18px}
+.fcard.accent{border-left-color:var(--petrol);box-shadow:none}
+.ftag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.fcard.accent .ftag{color:var(--ochre)}
+.fcard.plain .ftag{color:var(--petrol)}
+.fcard h3{margin:0 0 12px;font-size:18px}
+.fcard ul{margin:0;padding-left:18px}
+.fcard li{margin:0 0 7px;font-size:14.5px;line-height:1.5}
+.big-fig{font-family:'Unbounded',sans-serif;font-weight:800;font-size:25px;color:var(--ink);margin:6px 0 2px;letter-spacing:-.02em}
+.big-fig .m{font-family:'Unbounded',sans-serif}
+.big-fig small{font-family:'Commissioner';font-weight:500;font-size:13.5px;color:var(--ink-soft);display:block;margin-top:3px}
+.figure{background:none;border:none;border-radius:0;padding:0;margin:30px 0}
+.figure .cap{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.04em;color:var(--ink-soft);margin:2px 4px 6px;text-transform:uppercase}
+.figure .cap .unit{color:var(--petrol);font-weight:600}
+.figure .cap-sub{font-size:15px;color:var(--ink);margin:0 4px 16px;line-height:1.55;max-width:66ch}
+.figure .cap-sub b{color:var(--petrol-deep);font-weight:600}
+.figure .note{font-size:13px;color:var(--ink-soft);margin:10px 6px 2px;line-height:1.5}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:12px 6px 2px}
+.lg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace}
+.sw{width:13px;height:13px;border-radius:3px;display:inline-block}
+.tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.tbl th,.tbl td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;background:rgba(255,255,255,.05)}
+.tbl td.num,.tbl td .m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl tr td:first-child{font-weight:500}
+.tbl .hl{color:var(--petrol-deep);font-weight:600}
+.call{border-left:3px solid var(--petrol);background:none;padding:2px 0 2px 16px;border-radius:0;margin:20px 0;font-size:14.5px}
+.call.warn{border-color:var(--clay)}
+.call .ct{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:7px;color:var(--petrol)}
+.call.warn .ct{color:var(--clay)}
+.flowchart{margin:22px 0 8px;text-align:center}
+.flowchart svg{max-width:100%;height:auto;display:inline-block;vertical-align:top}
+.nodeLabel{line-height:1.36}
+.nodeLabel b{font-weight:700}
+.nodeLabel small{display:inline-block;margin-top:2px;font-size:11px;font-weight:400;opacity:.72}
+.edgeLabel{font-family:'IBM Plex Mono',monospace}
+.area{background:none;border:none;border-radius:0;padding:18px 0 0;margin:28px 0 0;border-top:1px solid var(--line)}
+.area-top{display:flex;align-items:flex-start;gap:14px}
+.area-ico{flex:none;width:46px;height:46px;border-radius:10px;background:rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center}
+.area-ico svg{width:26px;height:26px;stroke:#8fd0ea}
+.area-ico svg circle{fill:#8fd0ea}
+.area-ico svg [fill="#1E5A8C"]{fill:#8fd0ea}
+.area h3{margin:0 0 2px;font-size:17px}
+.area .sub{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--petrol);margin:0 0 8px}
+.area p{font-size:14px;margin:0;color:var(--ink-soft);line-height:1.5}
+.lots{margin:14px 0 0;display:grid;gap:10px}
+.lot{display:flex;justify-content:space-between;gap:12px;align-items:baseline;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 14px}
+.lot .ld{font-size:13.5px;line-height:1.4}
+.lot .ld .meta{color:var(--ink-soft);font-size:12.5px;font-family:'IBM Plex Mono',monospace}
+.lot .lp{text-align:right;white-space:nowrap}
+.lot .lp .pr{font-family:'Unbounded',sans-serif;font-weight:700;font-size:15px}
+.lot .lp .pm{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:2px}
+.badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;margin-top:4px}
+.badge.fit{background:rgba(116,201,191,.2);color:#a9e3d9}
+.badge.edge{background:rgba(124,195,232,.2);color:#c2e4f7}
+.alink{display:inline-block;margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;color:var(--petrol-deep)}
+.alink:after{content:" ↗"}
+ol.steps{counter-reset:st;list-style:none;padding:0;margin:18px 0}
+ol.steps li{position:relative;padding:4px 0 16px 46px}
+ol.steps li:before{counter-increment:st;content:counter(st);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:8px;background:var(--petrol);color:#fff;font-family:'Unbounded',sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+ol.steps li:not(:last-child):after{content:"";position:absolute;left:14px;top:34px;bottom:2px;width:1.5px;background:var(--line)}
+ol.steps li strong{display:block;margin-bottom:2px}
+ol.steps li span{font-size:14px;color:var(--ink-soft)}
+.src{list-style:none;padding:0;margin:14px 0}
+.src li{padding:11px 2px;border-bottom:1px solid var(--line);font-size:14px;display:flex;gap:12px;align-items:baseline}
+.src .sc{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--petrol);flex:none;width:118px}
+.src a{word-break:break-word}
+.foot{margin-top:34px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);line-height:1.6}
+.foot .mono{font-family:'IBM Plex Mono',monospace;font-size:11.5px}
+@media(max-width:680px){.fork{grid-template-columns:minmax(0,1fr)}.big-fig{font-size:18px}.param{flex:1 1 45%;border-right:none}.wrap{padding:0 18px 8px}.hero{padding:46px 18px 38px}.curbar .ci{padding:9px 18px}.curbar .rate{width:100%;margin-left:0}.src .sc{width:100%}.src li{flex-wrap:wrap;gap:3px}.lot{flex-direction:column}.lot .lp{text-align:left}}
+@media print{body{background:#fff}.curbar{display:none}.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.area-photo{position:relative;margin:0 0 14px;border-radius:12px;overflow:hidden;background:rgba(255,255,255,.05)}
+.area-photo img{width:100%;height:auto;display:block}
+.area-photo .phc{position:absolute;right:8px;bottom:6px;z-index:2;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#fff;background:rgba(0,0,0,.45);padding:2px 7px;border-radius:6px}
+a.area{display:block;text-decoration:none;color:inherit;transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease}
+a.area:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(20,42,46,.10);border-color:var(--petrol)}
+.tile-cta{display:inline-block;margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;color:var(--petrol-deep)}
+.tile-cta:after{content:" ↗"}
+.winner{background:linear-gradient(0deg,rgba(192,128,28,.05),rgba(192,128,28,.05)),var(--card);border:1px solid var(--ochre);box-shadow:inset 0 0 0 1px var(--ochre)}
+.kbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kc{background:none;border:none;border-top:1px solid var(--line);border-radius:0;padding:13px 0 0}
+.kc .kk{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--petrol);margin-bottom:6px}
+.kc .kv{font-family:'Unbounded',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em}
+.kc .kv small{font-family:'Commissioner';font-weight:500;font-size:12.5px;color:var(--ink-soft);display:block;margin-top:2px}
+
+.il{color:var(--petrol-deep);text-decoration:underline;text-underline-offset:.15em;text-decoration-thickness:1px}
+.il:hover{color:#2F86B3}
+
+/* nested example listing card ("плитка в плитці") */
+.lotcard{display:block;margin-top:14px;padding:2px 0 2px 16px;border:none;border-left:2px solid var(--line);border-radius:0;background:none;text-decoration:none;color:inherit;transition:border-color .12s ease,transform .12s ease}
+.lotcard:hover{border-left-color:var(--petrol);background:none;transform:translateX(2px)}
+.lotcard-tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--petrol);background:rgba(30,90,140,.10);padding:2px 8px;border-radius:6px;margin-bottom:9px}
+.lotcard-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.lotcard-info{min-width:0}
+.lotcard-t{font-weight:600;font-size:14px;line-height:1.3;color:var(--ink)}
+.lotcard-m{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:3px}
+.lotcard-price{flex:none;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:16px;color:#a6d4ef;white-space:nowrap}
+.lotcard-cta{display:block;margin-top:10px;font-size:12px;color:var(--petrol);font-weight:500}
+
+.lotcard-prog{display:flex;gap:6px;flex-wrap:wrap;margin:9px 0 3px}
+.pb{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;letter-spacing:.01em;white-space:nowrap}
+.pb-e{background:rgba(95,165,215,.17);color:#9fd0ec;border:1px solid rgba(125,185,225,.42)}
+.pb-l{background:rgba(64,178,120,.17);color:#84dca8;border:1px solid rgba(110,200,150,.42)}
+.pb-x{background:rgba(255,255,255,.06);color:#aab6c4;border:1px solid rgba(255,255,255,.16);font-weight:500}
+
+.lotcard-links{display:flex;flex-direction:column;gap:7px;margin-top:11px}
+.pl{display:block;padding:9px 12px;border-radius:9px;text-decoration:none;line-height:1.25;transition:background .15s,transform .15s}
+.pl b{display:block;font-size:12.5px;font-weight:600}
+.pl span{display:block;font-size:10.5px;font-weight:400;opacity:.72;margin-top:2px}
+.pl-e{background:rgba(95,165,215,.15);color:#9fd0ec;border:1px solid rgba(125,185,225,.4)}
+.pl-e:hover{background:rgba(95,165,215,.24);transform:translateX(2px)}
+.pl-l{background:rgba(64,178,120,.15);color:#84dca8;border:1px solid rgba(110,200,150,.4)}
+.pl-l:hover{background:rgba(64,178,120,.24);transform:translateX(2px)}
+.zk{margin-top:8px;font-size:13px;line-height:1.55;color:#5b6b6e}
+.zk b{color:#1E5A8C;font-weight:600}
+
+.lotcard-e{background:rgba(95,165,215,.1);border-color:rgba(125,185,225,.4)}
+.lotcard-e:hover{border-color:#7cc3e8;background:rgba(95,165,215,.16)}
+.lotcard-l{background:rgba(64,178,120,.1);border-color:rgba(110,200,150,.4)}
+.lotcard-l:hover{border-color:#6fd0a0;background:rgba(64,178,120,.16)}
+.pb-low{background:rgba(64,178,120,.16);color:#84dca8;border:1px solid rgba(110,200,150,.4)}
+.pb-high{background:rgba(225,120,95,.16);color:#eaa089;border:1px solid rgba(225,140,115,.4)}
+.pb-r{background:rgba(95,165,215,.16);color:#9fd0ec;border:1px solid rgba(125,185,225,.4)}
+.pb-nr{background:rgba(255,255,255,.06);color:#9aa6b4;border:1px solid rgba(255,255,255,.15)}
+</style>
+<style>.tblscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0;border-radius:8px}.tblscroll .tbl{margin:0;min-width:560px}@media(max-width:680px){.wrap{padding-left:16px;padding-right:16px}}</style>
+</head>
+<body>
+<!-- currency switcher moved to the top of the blog post (page-level) -->
+
+<div class="hero"><div class="grid-bg"></div><div class="hero-inner">
+  <div class="params">
+    <div class="param"><div class="k">Найкраща ставка</div><div class="v">3%<small> весь строк</small></div></div>
+    <div class="param"><div class="k">Перший внесок</div><div class="v">від 6%</div></div>
+    <div class="param"><div class="k">Строк</div><div class="v">до 30 р.</div></div>
+    <div class="param"><div class="k">Вік житла</div><div class="v">до 50 р.</div></div>
+    <div class="param"><div class="k">План Б</div><div class="v">єОселя 7%</div></div>
+  </div>
+</div></div>
+
+<div class="wrap">
+
+<section id="s0"><div class="sec-head"><span class="sec-num">00</span><h2>Дві програми — і чому лотерея виграє</h2></div>
+  <p class="lead">Для однієї особи (ВПО) в Києві є два пільгові інструменти. Один дешевший майже вдвічі, але з лотереєю; другий дорожчий, зате гарантований. Розумна стратегія — подати на обидва. <span class="muted">Усі суми перемикаються грн / $ / € кнопками вгорі.</span></p>
+  <table class="tbl"><thead><tr><th>Параметр</th><th>🎲 Лотерея «Житло для ВПО»</th><th>єОселя (план Б)</th></tr></thead><tbody>
+    <tr><td>Ставка</td><td class="hl">3% — весь строк, не змінюється</td><td>7% → 10% з 11-го року</td></tr>
+    <tr><td>Перший внесок</td><td class="hl">від 6%</td><td>від 20%</td></tr>
+    <tr><td>Строк</td><td class="hl">до 30 років</td><td>до 20 років</td></tr>
+    <tr><td>Вік житла</td><td class="hl">до 50 років (майже весь фонд)</td><td>до 20 років (фактично новобудови)</td></tr>
+    <tr><td>Як отримати</td><td>випадковий розіграш, місць мало</td><td class="hl">гарантовано через банк</td></tr>
+    <tr><td>Платіж* / 1-й внесок</td><td class="hl">~<span class="m" data-uah="13403"></span>/міс · 1-й внесок <span class="m" data-uah="154260"></span></td><td>~<span class="m" data-uah="18762"></span>→<span class="m" data-uah="21355"></span>/міс · 1-й внесок <span class="m" data-uah="514200"></span></td></tr>
+  </tbody></table>
+  <p class="muted">*Для одного й того ж кредиту ~<span class="m" data-uah="2420000"></span> на 20 років. Лотерея — і дешевший платіж, і втричі менший перший внесок. Деталі нижче.</p>
+</section>
+
+<section id="s1"><div class="sec-head"><span class="sec-num">01</span><h2>🎲 Лотерея: «Житло для ВПО» під 3%</h2></div>
+  <p class="lead">Це програма Держмолодьжитла (постанова КМУ <a class="il" href="https://zakon.rada.gov.ua/laws/show/451-2021-%D0%BF" target="_blank" rel="noopener">№451</a>), що фінансується грантами <strong><a class="il" href="https://www.kfw.de/" target="_blank" rel="noopener">KfW</a></strong> (банк розвитку ФРН), <strong><a class="il" href="https://coebank.org/" target="_blank" rel="noopener">БРРЄ</a></strong> (Банк розвитку Ради Європи) та <strong><a class="il" href="https://ukraine.iom.int/" target="_blank" rel="noopener">МОМ</a></strong> (Міжнародна організація з міграції). Кредит видає сам фонд — без банків і без «субсидування ставки». Найвигідніші умови з усіх доступних ВПО:</p>
+  <div class="kbox">
+    <div class="kc"><div class="kk">Ставка</div><div class="kv">3%<small>на весь строк</small></div></div>
+    <div class="kc"><div class="kk">Перший внесок</div><div class="kv">від 6%<small><span class="m" data-uah="120000"></span> за житло <span class="m" data-uah="2000000"></span></small></div></div>
+    <div class="kc"><div class="kk">Строк</div><div class="kv">до 30 р<small>але до 65 р. позичальника</small></div></div>
+    <div class="kc"><div class="kk">Вік житла</div><div class="kv">до 50 р<small>первинка і вторинка</small></div></div>
+  </div>
+  <div class="call good"><div class="ct">Ставка не «стрибає» — навіть при простроченні</div>На відміну від «єОселі» (де після 10-го року 7% стає 10%, а при дефолті — взагалі комерційна ставка 20%+), тут <strong>3% діють весь строк</strong>. Навіть якщо прострочити платіж — після сплати пені ви далі платите 3%. Це принципова перевага.</div>
+
+  <h3>Скільки треба готівки і який платіж</h3>
+  <p>Перший внесок — лише <strong>6%</strong>. Для одного фінансується житло до нормативної вартості ~<span class="m" data-uah="2571000"></span> (про ліміти — нижче). Платіж під 3% — ануїтет на весь строк:</p>
+  <div class="figure"><div class="cap">Щомісячний платіж під 3% · <span class="unit"></span>/міс</div>
+    <div class="cap-sub">Чим довший кредит — тим <b>менший платіж щомісяця</b>. Ось скільки виходить на місяць під 3% для строків 30, 20 і 15 років.</div>
+    <div id="c-lottery"></div>
+    <div class="legend"><span class="lg"><span class="sw" style="background:#A9D2DA"></span>30 років</span><span class="lg"><span class="sw" style="background:#4F93B0"></span>20 років</span><span class="lg"><span class="sw" style="background:#235E86"></span>15 років</span></div></div>
+  <table class="tbl"><thead><tr><th>Житло / кредит</th><th>Перший внесок 6%</th><th>30 років</th><th>20 років</th><th>15 років</th></tr></thead><tbody>
+    <tr><td><span class="m" data-uah="2000000"></span> / <span class="m" data-uah="1880000"></span></td><td class="num"><span class="m" data-uah="120000"></span></td><td class="num hl"><span class="m" data-uah="7926"></span></td><td class="num"><span class="m" data-uah="10426"></span></td><td class="num"><span class="m" data-uah="12983"></span></td></tr>
+    <tr><td><span class="m" data-uah="2571000"></span> / <span class="m" data-uah="2416740"></span><br><span class="muted">норматив 1 особи</span></td><td class="num"><span class="m" data-uah="154260"></span></td><td class="num hl"><span class="m" data-uah="10189"></span></td><td class="num"><span class="m" data-uah="13403"></span></td><td class="num"><span class="m" data-uah="16690"></span></td></tr>
+  </tbody></table>
+  <div class="call ochre"><div class="ct">Порівняйте з «єОселею»</div>Той самий кредит ~<span class="m" data-uah="2420000"></span>: лотерея під 3% на 20 р = <strong><span class="m" data-uah="13403"></span>/міс</strong>; «єОселя» 7%→10% = <span class="m" data-uah="18762"></span>, потім <span class="m" data-uah="21355"></span>/міс. А перший внесок — <span class="m" data-uah="154260"></span> проти <span class="m" data-uah="514200"></span>. За 30 років переплата по лотереї менша у рази.</div>
+
+  <h3>Яке житло підходить (це найважливіше)</h3>
+  <p>Тут вимоги до квартири <strong>значно ширші</strong>, ніж у «єОселі»:</p>
+  <table class="tbl"><tbody>
+    <tr><td>Площа</td><td>До <strong>52,5 м²</strong> на 1 особу (або сім'ю з 2 осіб) + 21 м² на кожного наступного члена. Для однієї людини — 52,5 м².</td></tr>
+    <tr><td>Вік будинку</td><td class="hl">Зданий в експлуатацію <strong>не більше 50 років тому</strong> (тобто ~1976 р. і новіший) <strong>або</strong> реконструйований не більше 35 років тому. Це майже весь житловий фонд — і <strong>первинка, і вторинка</strong>.</td></tr>
+    <tr><td>Ціна за м²</td><td>Не вище граничної. У Києві орієнтовно <strong>~<span class="m" data-uah="49000"></span>/м²</strong> → норматив для 1 особи ≈ 52,5 × <span class="m" data-uah="49000"></span> = <span class="m" data-uah="2571000"></span>. Дорожче або більше за норму — різницю доплачуєте з власного першого внеску.</td></tr>
+    <tr><td>Локація</td><td>Будь-де в Україні, де працює програма, <strong>окрім</strong> тимчасово окупованих територій і районів бойових дій.</td></tr>
+    <tr><td>Інше</td><td>Не може бути часткою, гуртожитком, відомчою будівлею чи памʼяткою архітектури; має бути введене в експлуатацію.</td></tr>
+  </tbody></table>
+  <div class="call"><div class="ct">Що це означає по районах Києва</div>Підходить переважна більшість будинків <strong>від кінця 1970-х і новіших</strong>: Святошино/Академмістечко, Оболонь, Лісовий/Дарниця/Троєщина, Позняки/Осокорки, Виноградар, усі новобудови, а також передмістя. <strong>Виняток</strong> — найстаріша забудова: напр. Русанівка (1964–1974) переважно старша за 50 років, тож під лотерею проходять лише поодинокі/реконструйовані будинки.</div>
+
+  <h3>Як працює розіграш</h3>
+  <ol class="steps">
+    <li><strong>Подаєте заявку — один раз</strong><span>Через «Дію» (КЕП/BankID). Система автоматично перевіряє статус ВПО, відсутність майна й доходи (до 20 хв).</span></li>
+    <li><strong>Потрапляєте до реєстру кандидатів</strong><span>Рішення — за 1 робочий день. Реєстр алфавітний, вам присвоюють індивідуальний номер. Він на сайті Держмолодьжитла.</span></li>
+    <li><strong>Випадковий відбір переможців</strong><span>Держмолодьжитло проводить розіграш генератором випадкових чисел (сервіс RandomPicker) у прямому ефірі. Відбори відбуваються регулярно — приблизно раз на місяць (напр., відбір №26 — 14.05.2026). Дату наступного оголошують заздалегідь. Анонси й результати — на сайті <a class="il" href="https://www.molod-kredit.gov.ua/zhytlovi-prohramy/kredyt-dlia-vpo-kfw/rezultaty-vidboru-peremozhtsiv" target="_blank" rel="noopener">molod-kredit.gov.ua</a> (розділ «Результати відбору переможців») і в застосунку «Дія».</span></li>
+    <li><strong>Виграли — оформлюєте кредит</strong><span>Протягом місяця подаєте документи; фонд ухвалює рішення (за наявності коштів гранту), далі оцінка, договір, угода.</span></li>
+    <li><strong>Не виграли — нічого робити не треба</strong><span>Заявка лишається в реєстрі назавжди; повторно подавати не потрібно — берете участь у наступних розіграшах.</span></li>
+  </ol>
+
+  <h3>Хто може брати участь</h3>
+  <p>Потрібно одночасно: мати <strong>активну довідку ВПО</strong>; <strong>не мати власного житла</strong> на підконтрольній території (виняток — житло на ТОТ або в зоні бойових дій); бути <strong>платоспроможним</strong> (після щомісячного платежу залишок доходу на кожного члена сім'ї ≥ прожитковий мінімум); дати <strong>згоду на перевірку кредитної історії</strong>.</p>
+
+  <div class="call warn"><div class="ct">Чесно про мінуси</div><strong>Головний — обмежене фінансування.</strong> Місць мало: за етап обирають приблизно <strong>400–1100 родин</strong> (напр., етап №25 — 425 переможців), за 4 роки програмою скористалися ~1,1 тис. родин, на 2025-й планували ~1460. Тобто це <strong>лотерея в прямому сенсі</strong> — шанс залежить від кількості заявок і доступних коштів. Також гранична ціна/м² нижча, ніж у «єОселі» (~<span class="m" data-uah="49000"></span> проти <span class="m" data-uah="62230"></span>), тож у Києві фінансується ~<span class="m" data-uah="2571000"></span>; дорожче — доплата з першого внеску.</div>
+</section>
+
+<section id="s2"><div class="sec-head"><span class="sec-num">02</span><h2>Інфляція гривні: чому пільговий кредит виграє</h2></div>
+  <p class="lead">Будь-який кредит у гривні з фіксованою ставкою вигідний, бо гривня <strong>щороку дешевшає</strong>. Для 3% це працює ще сильніше. Факти:</p>
+  <h3>Від карбованця до інфляційного таргета</h3>
+  <p>Сучасну гривню запровадили у <strong>вересні 1996 року</strong> — після гіперінфляції першої половини 90-х, коли ціни в карбованцях зростали на <strong>~2 000% (1992)</strong> і <strong>понад 10 000% (1993)</strong> через незабезпечену емісію грошей. Відтоді інфляція стала помірнішою, з різкими сплесками у кризи. З 2016 року НБУ працює в режимі <strong>інфляційного таргетування з ціллю 5%</strong>.</p>
+  <div class="figure"><div class="cap">Річна інфляція гривні (грудень до грудня), % · ДССУ / НБУ · прогноз НБУ — пунктиром</div>
+    <div class="cap-sub">Щороку гривня дешевшає — ось наскільки, рік за роком. Саме тому <b>борг у гривні з часом «легшає»</b> сам собою.</div>
+    <div id="c-infl"></div>
+    <div class="note">Шкала з 1996 р. (запровадження гривні). Червоним — кризові сплески: 2008 (світова криза), 2015 (війна й девальвація), 2022 (вторгнення). 1991–1995 (карбованець) у масштаб не вміщаються — там були тисячі відсотків.</div></div>
+  <p>Підсумок 30 років гривні: <strong>середня інфляція ≈ 13,0% на рік</strong>, а сукупно ціни зросли приблизно у <strong>39 разів</strong> (1996→2025). За 2024 рік інфляція склала 12%, у 2025-му — <strong>~8%</strong>. Прогноз НБУ (квітень 2026): сповільнення до <strong>~6,5% у 2027-му</strong> і цілі <strong>5% у 2028-му</strong>. Важливо: реальні зарплати ростуть на <strong>5–7% на рік</strong> — швидше за ціни.</p>
+  <p>Чи реалістична ціль НБУ 5% під час війни? Чесно — поки війна триває, радше ні. 5% — це середньостроковий орієнтир за умови деескалації та макростабілізації. Поки тривають активні бойові дії, інфляцію підштовхують бюджетний дефіцит, руйнування енергетики й інфраструктури та тиск на курс, тож реалістичніший робочий діапазон на найближчі роки — радше <strong>8–12%</strong> (ближче до історичного), а не 5%. Саме тому розрахунок нижче бере 8–12%: це обережніше (і чесніше) припущення, ніж цільові 5%. Парадокс у тому, що для позичальника під 3% вища інфляція навіть вигідніша — борг тане швидше.</p>
+  <div class="figure"><div class="cap">Реальна вартість платежу <span class="m" data-uah="18000"></span>/міс — ілюстративний прогноз (у цінах 2026)</div>
+    <div class="cap-sub">Платіж на папері однаковий, але з роками важить дедалі менше. Ось як <b>той самий внесок поступово стає легшим</b> для вашого бюджету.</div>
+    <div id="c-erode"></div>
+    <div class="note"><strong>Це ілюстративний прогноз, а не факт.</strong> Припущення: інфляція тримається на 8–12%/рік (суцільна лінія — 10%, пунктир — коридор). На чому ґрунтується: середня інфляція гривні за 1996–2025 ≈ 13%/рік (графік вище); прогноз НБУ — 8,6% (2026) → 6,5% (2027) → ціль 5% (2028). Якщо інфляція впаде до цілі НБУ — знецінення буде повільнішим, ніж тут; якщо лишиться високою — швидшим. Суть незмінна: під 3% (нижче за інфляцію) реальна вартість боргу щороку тане.</div></div>
+  <p>Тобто ви берете гроші «дорогими» сьогодні, а віддаєте «дешевими» завтра. Під 3% (нижче за інфляцію) реальний борг тане щороку. Додатково частину сплачених відсотків можна повернути через <strong>податкову знижку з ПДФО</strong> (ст. 175 ПКУ).</p>
+  <h3>Скільки інфляція «дарує» за різні строки</h3>
+  <p>Порахуймо на кредиті <span class="m" data-uah="2416740"></span> (норматив для однієї особи, лотерея під 3%). <b>Реальна вартість</b> — це скільки майбутні платежі коштують у <em>сьогоднішніх</em> грошах; різниця з номіналом і є <b>економія від інфляції</b>. Це не готівка на руки, а знецінення боргу: гроші, якими ви платитимете через 10–20 років, будуть значно «дешевшими» за теперішні.</p>
+  <table class="tbl"><thead><tr><th>Строк</th><th>Платіж/міс</th><th>Сплатите всього</th><th>Реально (у грошах 2026)</th><th>Економія від інфляції</th></tr></thead><tbody>
+    <tr><td>10 років</td><td class="num"><span class="m" data-uah="23336"></span></td><td class="num"><span class="m" data-uah="2800347"></span></td><td class="num"><span class="m" data-uah="1765879"></span></td><td class="num hl"><span class="m" data-uah="1034468"></span></td></tr>
+    <tr><td>15 років</td><td class="num"><span class="m" data-uah="16690"></span></td><td class="num"><span class="m" data-uah="3004121"></span></td><td class="num"><span class="m" data-uah="1553088"></span></td><td class="num hl"><span class="m" data-uah="1451033"></span></td></tr>
+    <tr><td>20 років</td><td class="num"><span class="m" data-uah="13403"></span></td><td class="num"><span class="m" data-uah="3216764"></span></td><td class="num"><span class="m" data-uah="1388900"></span></td><td class="num hl"><span class="m" data-uah="1827864"></span></td></tr>
+    <tr><td>30 років<br><span class="muted">максимум лотереї</span></td><td class="num"><span class="m" data-uah="10189"></span></td><td class="num"><span class="m" data-uah="3668066"></span></td><td class="num"><span class="m" data-uah="1161053"></span></td><td class="num hl"><span class="m" data-uah="2507013"></span></td></tr>
+  </tbody></table>
+  <p class="muted">Розрахунок при інфляції 10%/рік (як на графіку). Якщо вона впаде до цілі НБУ (5%), економія приблизно вдвічі менша: 10 р — <span class="m" data-uah="600176"></span>, 15 р — <span class="m" data-uah="893639"></span>, 20 р — <span class="m" data-uah="1185842"></span>, 30 р — <span class="m" data-uah="1770029"></span>. У будь-якому випадку вона додатна, доки інфляція вища за 3%.</p>
+  <div class="call good"><div class="ct">Парадокс ставки 3%</div>Оскільки 3% <strong>нижче за інфляцію</strong>, що довший строк — то <strong>дешевша квартира в реальних грошах</strong>: 30-річний кредит коштує менше «сьогоднішніх» грошей, ніж 10-річний. Тож якщо щомісячний платіж комфортний — є сенс брати <strong>довший строк</strong>. Зворотний бік: номінально гривень віддасте більше (просто вони будуть дешевшими), і ви довше формально в борзі. У «єОселі» під 7% ефект слабший — там реальна ставка близька до нуля, тож вибір строку — радше про щомісячний бюджет, ніж про економію.</div>
+</section>
+
+<section id="s3"><div class="sec-head"><span class="sec-num">03</span><h2>План Б: «єОселя» (гарантовано, 7%)</h2></div>
+  <p>Якщо не пощастило в розіграші — «єОселя» (постанова <a class="il" href="https://zakon.rada.gov.ua/laws/show/856-2022-%D0%BF" target="_blank" rel="noopener">№856</a>) видається через банк за вашим доходом, без лотереї. Дорожче за лотерею, але доступно завжди. Для ВПО — <strong>7% на 10 років, далі 10%</strong>, перший внесок від 20%, строк до 20 років. Дві гілки залежно від ціни:</p>
+  <div class="fork">
+    <div class="fcard accent plain"><div class="ftag">Гілка A · з компенсацією</div>
+      <h3>Житло до <span class="m" data-uah="2000000"></span></h3>
+      <div class="big-fig"><span class="m" data-uah="120000"></span><small>стільки треба своїх на перший внесок</small></div>
+      <ul><li>Держава платить <strong>70% першого внеску</strong> (≤30% ціни) + <strong>70% платежів 1-го року</strong> + до <span class="m" data-uah="40000"></span> на оформлення (постанова <a class="il" href="https://zakon.rada.gov.ua/laws/show/998-2025-%D0%BF" target="_blank" rel="noopener">№998</a>)</li>
+      <li>У Києві: житло <strong>≤10 років</strong>, ціна ≤ <span class="m" data-uah="2000000"></span> → ~30–35 м² (студія) або квартира в передмісті</li>
+      <li>Платіж 1-го року з кишені — ~<span class="m" data-uah="3700"></span>/міс</li></ul></div>
+    <div class="fcard plain"><div class="ftag">Гілка B · базова</div>
+      <h3>Житло <span class="m" data-uah="2000000"></span> – <span class="m" data-uah="3270000"></span></h3>
+      <div class="big-fig"><span class="m" data-uah="540000" data-uah2="654000"></span><small>перший внесок 20% повністю свій</small></div>
+      <ul><li>Ставки ті самі <strong>7% / 10%</strong>, без компенсації</li>
+      <li>Стеля ціни/м² у Києві — <span class="m" data-uah="62230"></span>; норматив для 1 особи ≈ 52,5 × <span class="m" data-uah="62230"></span> = <span class="m" data-uah="3270000"></span></li>
+      <li>Для ВПО житло має бути <strong>не старше 20 років</strong> (фактично новобудови ~2006+)</li></ul></div>
+  </div>
+  <div class="figure"><div class="cap">Перший внесок: скільки з власної кишені · <span class="unit"></span></div>
+    <div class="cap-sub">Скільки готівки треба зібрати на старті. Для дешевшого житла <b>більшу частину вносить держава</b> (світла частина стовпчика — не ваша).</div>
+    <div id="c-down"></div>
+    <div class="legend"><span class="lg"><span class="sw" style="background:var(--petrol)"></span>ваші кошти</span><span class="lg"><span class="sw" style="background:#9FCDD0"></span>покриває держава (компенсація ВПО)</span></div></div>
+  <div class="figure"><div class="cap">Платіж єОселі, роки 1–10 (ставка 7%) · <span class="unit"></span>/міс</div>
+    <div class="cap-sub">Скільки платити щомісяця по «єОселі» в перші 10 років — для різних цін житла й строків.</div>
+    <div id="c-month"></div>
+    <div class="legend"><span class="lg"><span class="sw" style="background:#B9CFDC"></span>10 р</span><span class="lg"><span class="sw" style="background:#2F7BA0"></span>15 р</span><span class="lg"><span class="sw" style="background:var(--petrol-deep)"></span>20 р</span></div></div>
+  <table class="tbl"><thead><tr><th>Житло / кредит</th><th>Строк</th><th>Роки 1–10 (7%)</th><th>Роки 11+ (10%)</th><th>Переплата</th></tr></thead><tbody>
+    <tr><td><span class="m" data-uah="2000000"></span> / <span class="m" data-uah="1600000"></span></td><td class="num">20 р</td><td class="num hl"><span class="m" data-uah="12405"></span></td><td class="num"><span class="m" data-uah="14119"></span></td><td class="num"><span class="m" data-uah="1582818"></span></td></tr>
+    <tr><td><span class="m" data-uah="2700000"></span> / <span class="m" data-uah="2160000"></span></td><td class="num">20 р</td><td class="num hl"><span class="m" data-uah="16746"></span></td><td class="num"><span class="m" data-uah="19060"></span></td><td class="num"><span class="m" data-uah="2136805"></span></td></tr>
+    <tr><td><span class="m" data-uah="3270000"></span> / <span class="m" data-uah="2616000"></span></td><td class="num">20 р</td><td class="num hl"><span class="m" data-uah="20282"></span></td><td class="num"><span class="m" data-uah="23084"></span></td><td class="num"><span class="m" data-uah="2587908"></span></td></tr>
+  </tbody></table>
+  <p class="muted">Інші умови «єОселі»: ануїтет; максимум кредиту <span class="m" data-uah="5000000"></span> і ≤80% вартості; обов'язкове страхування (~0,25–0,5%/рік, воєнні ризики окремо); дострокове погашення без штрафів; до повного погашення квартира в іпотеці банку. Банки: Ощад, Privat, Укргаз, Sense, Globus, Таском, Sky, Кредит Дніпро.</p>
+</section>
+
+<section id="s4"><div class="sec-head"><span class="sec-num">04</span><h2>Ринок: що по чому в районах</h2></div>
+  <p>Середня 1-кімнатна на вторинці (дані ЛУН, середина 2026). Вертикальна лінія — стеля «єОселі» для однієї особи. Для лотереї гранична ціна/м² нижча (~<span class="m" data-uah="49000"></span>), тож орієнтуйтеся ще й на неї.</p>
+  <div class="figure"><div class="cap">Середня ціна 1-кімнатної по районах Києва · <span class="unit"></span></div>
+    <div class="cap-sub"><b>Зелені</b> райони впишуться в програму, <b>червоні</b> — зазвичай задорого. Ось середня ціна однокімнатної по районах.</div>
+    <div id="c-distr"></div>
+    <div class="legend"><span class="lg"><span class="sw" style="background:var(--sage)"></span>вписується в єОселю</span><span class="lg"><span class="sw" style="background:var(--ochre)"></span>на межі</span><span class="lg"><span class="sw" style="background:var(--clay)"></span>зазвичай дорого</span></div>
+    <div class="note">Ціна — не єдиний фільтр: під лотерею важливий вік ≤50 р., під «єОселю» — ≤20 р. Дешеві лоти є і в «дорогих» районах.</div></div>
+  <p class="muted">Передмістя дешевше: Бровари ≈ <span class="m" data-uah="36500"></span>/м², Ірпінь і Вишневе ≈ <span class="m" data-uah="47000"></span>/м². Там багато новобудов ≤10–20 р. — підходять під обидві програми.</p>
+</section>
+
+<section id="s5"><div class="sec-head"><span class="sec-num">05</span><h2>Приклади квартир — в окремому пості</h2></div>
+  <div class="call"><div class="ct">Конкретні оголошення</div>Щоб тут лишалися тільки цифри й логіка, конкретні приклади квартир під обидві програми — по районах Києва й передмістю та <strong>8 фаворитів за профілями</strong> — винесено в окремий пост (його простіше тримати свіжим). <a href="/blog/kvartyry-dlya-vpo-pryklady/" target="_top"><strong>Перейти до прикладів квартир →</strong></a></div>
+</section>
+
+
+
+<section id="s6"><div class="sec-head"><span class="sec-num">06</span><h2>Як діяти — паралельна стратегія</h2></div>
+  <p class="lead">Це не лінійна історія, а розвилка. Головне — подати на <strong>обидві</strong> програми одразу, а далі діяти за результатом:</p>
+  <div class="flowchart" id="flowchart" aria-label="Блок-схема: як діяти"></div>
+  <p class="muted">Виграли чи ні — фінал однаковий: незалежна оцінка → страхування → договір у нотаріуса → перерахунок продавцю. Квартира одразу ваша, але в іпотеці банку до погашення.</p>
+  <div class="call ochre"><div class="ct">Якщо ви ще й УБД або маєте інвалідність внаслідок війни</div>Відкривається ще й житловий ваучер <span class="m" data-uah="2000000"></span> (грант, не борг) для ВПО з ТОТ — його можна докласти як перший внесок.</div>
+</section>
+
+<section id="s7"><div class="sec-head"><span class="sec-num">07</span><h2>Чесні застереження</h2></div>
+  <div class="call warn"><div class="ct">Лотерея — це справді лотерея</div>Місць ~400–1100 за етап на всю країну. Подати варто (це безкоштовно й нічого не зобовʼязує), але будувати план лише на ній не можна — тому й тримаємо «єОселю».</div>
+  <div class="call warn"><div class="ct">Вік житла відсікає багато оголошень</div>Гарна стара квартира (Русанівка, старий центр, «сталінки») може не підійти під жодну програму. Фільтруйте за роком будівлі ще до перегляду.</div>
+  <div class="call warn"><div class="ct">Дохід і відмови</div>Обидві програми вимагають офіційного підтвердженого доходу та платоспроможності. ~15–20% заявок по «єОселі» відхиляють — найчастіше через недостатній дохід або протерміновану довідку ВПО.</div>
+  <div class="call warn"><div class="ct">Вузьке місце гілки A «єОселі»</div>Ліміт <span class="m" data-uah="2000000"></span> у Києві = ~30 м² у новому будинку; компенсацією масово скористалися одиниці (~сотня призначень станом на початок 2026). Для нормального метражу з компенсацією — передмістя.</div>
+</section>
+
+<section id="s8"><div class="sec-head"><span class="sec-num">08</span><h2>Джерела й корисні посилання</h2></div>
+  <div class="call"><div class="ct">Наступний пост</div>Конкретні приклади квартир під обидві програми — по районах Києва й передмістю та 8 фаворитів за профілями: <a href="/blog/kvartyry-dlya-vpo-pryklady/" target="_top"><strong>Квартири для ВПО: приклади →</strong></a></div>
+  <ul class="src">
+    <li><span class="sc">Лотерея</span><a href="https://diia.gov.ua/services/kredit-na-zhitlo-dlya-vpo">Дія — «Кредит на житло для ВПО» (Постанова №451)</a></li>
+    <li><span class="sc">Лотерея</span><a href="https://www.molod-kredit.gov.ua/zhytlovi-prohramy/kredyt-dlia-vpo-kfw">Держмолодьжитло — програма, відбір переможців, реєстр</a></li>
+    <li><span class="sc">Лотерея</span><a href="https://www.molod-kredit.gov.ua/zhytlovi-prohramy/kredyt-dlia-vpo-kfw/yak-podaty-zaiavu">Держмолодьжитло — як подати заяву</a></li>
+    <li><span class="sc">єОселя</span><a href="https://eoselia.diia.gov.ua/">eoselia.diia.gov.ua — офіційні умови (вік житла, площа)</a></li>
+    <li><span class="sc">єОселя</span><a href="https://ukrfinzhytlo.in.ua/e-oselia/">Укрфінжитло — оператор, правила, калькулятор</a></li>
+    <li><span class="sc">Компенсація ВПО</span><a href="https://mindev.gov.ua/news/zapratsiuvala-kompensatsiia-dlia-vpo-ta-meshkantsiv-pryfrontovykh-terytorii-u-prohrami-ieoselia">Мінрозвитку — компенсація 70% (Постанова №998)</a></li>
+    <li><span class="sc">Ліміти ціни</span><a href="https://thepage.ua/ua/news/novi-limiti-yeoselya-2026-granichna-vartist-kvadrata-po-regionah-ukrayini">Нові ліміти «єОселі» 2026 (Київ — 62 230 грн/м²)</a></li>
+    <li><span class="sc">Ціни ринку</span><a href="https://lun.ua/stat/sale/kyiv">ЛУН — статистика цін по районах Києва</a></li>
+    <li><span class="sc">Лоти</span><a href="https://lun.ua/sale/kyiv/flats">ЛУН — продаж квартир (фільтр ціни за м², вторинка+новобудови)</a></li>
+    <li><span class="sc">Інфляція</span><a href="https://bank.gov.ua/ua/monetary/report">НБУ — Інфляційні звіти й прогноз</a></li>
+    <li><span class="sc">Інфляція</span><a href="https://index.minfin.com.ua/ua/economy/index/inflation/">Мінфін / Держстат — індекс інфляції по роках</a></li>
+    <li><span class="sc">Курс</span><a href="https://bank.gov.ua/ua/markets/exchangerate-chart">НБУ — офіційний курс валют</a></li>
+  </ul>
+</section>
+
+<div class="foot">
+  <p class="mono">Станом на червень 2026. Лотерея — Постанова КМУ №451 (KfW/БРРЄ/МОМ), дані molod-kredit.gov.ua та Дія; «єОселя» — Постанови №856 і №998, гранична вартість Наказ №786; інфляція — ДССУ та НБУ; ціни — ЛУН, DOM.RIA.</p>
+  <p>Документ має інформаційний характер і не є фінансовою чи юридичною консультацією. Ставки, ліміти, ціни, курс і кількість місць у розіграші змінюються; лоти продаються. Гранична ціна/м² лотереї (~49 000 грн) — орієнтовна оцінка з опублікованих прикладів; точну суму під ваш склад сім'ї підтверджуйте в Держмолодьжитлі. Остаточні умови — у Держмолодьжитлі, банку-партнері та «Дії» перед угодою.</p>
+</div>
+</div>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.3/mermaid.min.js" onload="window.__flowReady&&window.__flowReady()"></script>
+<script>
+var RATES={UAH:1, USD:44.9, EUR:51.5};
+var SYM={UAH:'грн', USD:'$', EUR:'€'};
+var cur='UAH';
+var C={petrol:'#4a9bd0',petrold:'#2f78b0',ochre:'#5fa9d0',clay:'#e08468',sage:'#54b0a4',
+ ink:'#e7eef7',inks:'#a2b6c8',grid:'rgba(255,255,255,.10)',t10:'#6f93a8',t15:'#4a9bd0',sageL:'#6fc4b8'};
+
+function grp(x){x=Math.round(x);var s=Math.abs(x).toString();var o='';var c=0;
+ for(var i=s.length-1;i>=0;i--){o=s.charAt(i)+o;if(++c%3===0&&i>0)o=' '+o;}return (x<0?'-':'')+o;}
+function conv(uah){return uah/RATES[cur];}
+function fmtMoney(a,b){var pre=cur==='UAH'?'':SYM[cur];var u=cur==='UAH'?' грн':'';
+ if(b!=null){return pre+grp(conv(a))+'–'+pre+grp(conv(b))+u;}return pre+grp(conv(a))+u;}
+function axfmt(v){v=Math.round(v);var a=Math.abs(v);
+ if(a>=1e6)return (v/1e6).toFixed(v%1e6===0?0:1)+'M';
+ if(a>=1e3)return Math.round(v/1e3)+'k';return ''+v;}
+function niceStep(raw){if(raw<=0)raw=1;var p=Math.pow(10,Math.floor(Math.log(raw)/Math.LN10));
+ var f=raw/p;var nf=f<1.5?1:f<3?2:f<7?5:10;return nf*p;}
+function ticks(maxv,approx){if(maxv<=0)maxv=1;var step=niceStep(maxv/approx);
+ var max=Math.ceil(maxv/step)*step;var arr=[];for(var v=0;v<=max+step*1e-6;v+=step)arr.push(v);return{max:max,arr:arr};}
+function svgEl(w,h){return '<svg viewBox="0 0 '+w+' '+h+'" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;display:block">';}
+function txt(x,y,s,o){o=o||{};var a=o.anchor||'middle',f=o.size||11,fam=o.fam||'IBM Plex Mono,monospace',
+ w=o.weight?(' font-weight="'+o.weight+'"'):'',col=o.fill||C.inks;
+ return '<text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" text-anchor="'+a+'" font-family="'+fam+'" font-size="'+f+'"'+w+' fill="'+col+'">'+s+'</text>';}
+
+function amtShort(uah){var v=conv(uah);if(cur==='UAH'){var s=(v/1e6).toFixed(2).replace(/0$/,'').replace(/\.$/,'').replace('.',',');return s+' млн';}return SYM[cur]+Math.round(v/1e3)+' тис';}
+function chDown(){
+ var W=720,H=370,pl=58,pb=64,pt=34,base=H-pb,ph=base-pt;
+ var data=[[2000000,'+компенс.',120000,280000],[2000000,'без комп.',400000,0],[2700000,'',540000,0],[3270000,'стеля',654000,0]];
+ var mx=0;data.forEach(function(d){var t=conv(d[2])+conv(d[3]);if(t>mx)mx=t;});
+ var T=ticks(mx,6),sc=ph/T.max,s=svgEl(W,H);
+ T.arr.forEach(function(v){var y=base-v*sc;s+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(W-18)+'" y2="'+y.toFixed(1)+'" stroke="'+C.grid+'"/>';s+=txt(pl-8,y+4,axfmt(v),{anchor:'end'});});
+ s+='<line x1="'+pl+'" y1="'+pt+'" x2="'+pl+'" y2="'+base+'" stroke="#9FB6C4"/>';
+ var n=data.length,bw=78,gap=(W-pl-26-n*bw)/(n-1),x=pl+12;
+ data.forEach(function(d){var oop=conv(d[2]),st=conv(d[3]),ho=oop*sc;
+  s+='<rect x="'+x.toFixed(1)+'" y="'+(base-ho).toFixed(1)+'" width="'+bw+'" height="'+ho.toFixed(1)+'" rx="2" fill="'+C.petrol+'"/>';
+  var topY=base-ho;
+  if(st>0){var hs=st*sc;s+='<rect x="'+x.toFixed(1)+'" y="'+(base-ho-hs).toFixed(1)+'" width="'+bw+'" height="'+hs.toFixed(1)+'" rx="2" fill="'+C.sageL+'"/>';topY=base-ho-hs;
+   s+=txt(x+bw/2,base-ho-hs/2+4,'+'+grp(st),{size:10,fill:'#1F5E86'});}
+  s+=txt(x+bw/2,topY-7,grp(oop),{size:12.5,weight:600,fill:C.ink});
+  var lns=[amtShort(d[0])];if(d[1])lns.push(d[1]);lns.forEach(function(ln,i){s+=txt(x+bw/2,base+20+i*14,ln,{size:11});});
+  x+=bw+gap;});
+ return s+'</svg>';
+}
+
+function chMonth(){
+ var W=720,H=400,pl=58,pb=84,pt=34,base=H-pb,ph=base-pt;
+ var G=[[1600000,[['10р',18577],['15р',14381],['20р',12405]]],
+        [2160000,[['10р',25079],['15р',19415],['20р',16746]]],
+        [2616000,[['10р',30374],['15р',23513],['20р',20282]]]];
+ var mx=0;G.forEach(function(g){g[1].forEach(function(b){if(conv(b[1])>mx)mx=conv(b[1]);});});
+ var T=ticks(mx,6),sc=ph/T.max,s=svgEl(W,H);
+ T.arr.forEach(function(v){var y=base-v*sc;s+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(W-18)+'" y2="'+y.toFixed(1)+'" stroke="'+C.grid+'"/>';s+=txt(pl-8,y+4,axfmt(v),{anchor:'end'});});
+ s+='<line x1="'+pl+'" y1="'+pt+'" x2="'+pl+'" y2="'+base+'" stroke="#9FB6C4"/>';
+ var cols=[C.t10,C.t15,C.petrold],ng=G.length,bw=30,bg=8,gg=34,gw=3*bw+2*bg,tot=ng*gw+(ng-1)*gg,x=pl+((W-pl-26)-tot)/2+6;
+ G.forEach(function(g){var bx=x;g[1].forEach(function(b,bi){var h=conv(b[1])*sc;
+   s+='<rect x="'+bx.toFixed(1)+'" y="'+(base-h).toFixed(1)+'" width="'+bw+'" height="'+h.toFixed(1)+'" rx="2" fill="'+cols[bi]+'"/>';
+   s+=txt(bx+bw/2,base-h-6,grp(conv(b[1])),{size:10,weight:600,fill:C.ink});
+   s+=txt(bx+bw/2,base+15,b[0],{size:10});bx+=bw+bg;});
+  s+=txt(x+gw/2,base+36,'Кредит '+amtShort(g[0]),{size:12.5,weight:600,fam:'Commissioner,sans-serif',fill:C.ink});x+=gw+gg;});
+ return s+'</svg>';
+}
+
+function chInfl(){
+ var W=760,H=420,pl=42,pb=58,pt=48,pr=18,base=H-pb,ph=base-pt,pw=W-pl-pr;
+ var data=[[1996,39.7],[1997,10.1],[1998,20],[1999,19.2],[2000,25.8],[2001,6.1],[2002,-0.6],[2003,8.2],[2004,12.3],[2005,10.3],[2006,11.6],[2007,16.6],[2008,22.3],[2009,12.3],[2010,9.1],[2011,4.6],[2012,-0.2],[2013,0.5],[2014,24.9],[2015,43.3],[2016,12.4],[2017,13.7],[2018,9.8],[2019,4.1],[2020,5],[2021,10],[2022,26.6],[2023,5.1],[2024,12],[2025,8],[2026,8.6],[2027,6.5],[2028,5]];
+ var n=data.length,maxv=45,minv=-3,sy=ph/(maxv-minv);
+ function Y(v){return base-(v-minv)*sy;}
+ var step=pw/n,bw=step*0.74,s=svgEl(W,H);
+ for(var g=0;g<=40;g+=10){var y=Y(g);s+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(W-pr)+'" y2="'+y.toFixed(1)+'" stroke="'+C.grid+'"/>';s+=txt(pl-6,y+4,g+'%',{anchor:'end',size:10.5});}
+ var y0=Y(0);s+='<line x1="'+pl+'" y1="'+y0.toFixed(1)+'" x2="'+(W-pr)+'" y2="'+y0.toFixed(1)+'" stroke="#9FB6C4"/>';
+ var crisis={2008:1,2015:1,2022:1};
+ data.forEach(function(d,i){var x=pl+i*step+(step-bw)/2,v=d[1],yv=Y(v),isF=d[0]>=2026,h=Math.abs(yv-y0),top=v>=0?yv:y0;
+   var fill=isF?'none':(crisis[d[0]]?C.clay:C.petrol),extra=isF?(' stroke="'+C.petrol+'" stroke-width="1.3" stroke-dasharray="3 2"'):'';
+   s+='<rect x="'+x.toFixed(1)+'" y="'+top.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+Math.max(h,1).toFixed(1)+'" rx="1.5" fill="'+fill+'"'+extra+'/>';
+   if(d[0]%4===0||d[0]===2025||d[0]===2015){s+=txt(x+bw/2,base+15,"'"+(''+d[0]).slice(2),{size:9.5});}});
+ [[1996,39.7],[2008,22.3],[2015,43.3],[2022,26.6],[2025,8]].forEach(function(k){var idx=-1;data.forEach(function(d,j){if(d[0]===k[0])idx=j;});
+   var x=pl+idx*step+step/2,yv=Y(k[1]);s+=txt(x,yv-5,k[1].toFixed(0),{size:9.5,weight:600,fill:crisis[k[0]]?C.clay:C.petrold});});
+ function lbl(year,t,dy){var idx=-1;data.forEach(function(d,j){if(d[0]===year)idx=j;});var x=pl+idx*step+step/2;s+=txt(x,pt-6+dy,t,{size:10,fam:'Commissioner,sans-serif'});}
+ lbl(1996,'гривня',0);lbl(2008,'світова криза',0);lbl(2015,'війна / девальвація',0);lbl(2022,'вторгнення',14);
+ var fi=-1;data.forEach(function(d,j){if(d[0]===2026)fi=j;});s+=txt(pl+fi*step+step*1.5,pt+8,'прогноз НБУ',{size:9.5,fill:C.petrol});
+ return s+'</svg>';
+}
+
+function chErode(){
+ var W=720,H=360,pl=50,pb=52,pt=34,pr=20,base=H-pb,ph=base-pt,pw=W-pl-pr;
+ var baseUAH=18000,maxv=conv(baseUAH),sx=pw/20,sy=ph/maxv;
+ function P(t,v){return [pl+t*sx, base-conv(v)*sy];}
+ function curve(r){var a=[];for(var t=0;t<=20;t++){a.push(P(t,baseUAH/Math.pow(1+r,t)));}return a;}
+ var s=svgEl(W,H),T=ticks(maxv,6);
+ T.arr.forEach(function(v){var y=base-v*sy;s+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(W-pr)+'" y2="'+y.toFixed(1)+'" stroke="'+C.grid+'"/>';s+=txt(pl-8,y+4,axfmt(v),{anchor:'end'});});
+ for(var t=0;t<=20;t+=5){var x=pl+t*sx;s+=txt(x,base+19,t+' р',{});}
+ s+='<line x1="'+pl+'" y1="'+pt+'" x2="'+pl+'" y2="'+base+'" stroke="#9FB6C4"/>';
+ var c10=curve(0.10);
+ var area='M '+pl.toFixed(1)+' '+base.toFixed(1)+' '+c10.map(function(p){return 'L '+p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' ')+' L '+c10[c10.length-1][0].toFixed(1)+' '+base.toFixed(1)+' Z';
+ s+='<path d="'+area+'" fill="rgba(30,90,140,.12)"/>';
+ [0.08,0.12].forEach(function(r){var c=curve(r);s+='<path d="M '+c.map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' L ')+'" fill="none" stroke="#9FB6B6" stroke-width="1" stroke-dasharray="3 3"/>';});
+ s+='<path d="M '+c10.map(function(p){return p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' L ')+'" fill="none" stroke="'+C.petrol+'" stroke-width="2.6"/>';
+ [0,10,20].forEach(function(t){var v=baseUAH/Math.pow(1.1,t),p=P(t,v);
+   s+='<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="4" fill="'+C.petrol+'" stroke="#F1F6FB" stroke-width="2"/>';
+   var anc=t===0?'start':(t===20?'end':'middle'),dx=t===0?8:(t===20?-8:0);
+   s+=txt(p[0]+dx,p[1]-12,(cur==='UAH'?'':SYM[cur])+grp(conv(v)),{anchor:anc,size:12,weight:600,fill:C.ink});});
+ return s+'</svg>';
+}
+
+function chDistr(){
+ var W=720,H=470,pl=118,pt=36,pb=40,pr=64,base=H-pb;
+ var rows=[['Деснянський',45],['Святошинський',53],['Оболонський',57],['Дарницький',60],['Дніпровський',64],["Солом'янський",65],['Голосіївський',78],['Подільський',80],['Шевченківський',92],['Печерський',150]];
+ var thrUAH=3270000,maxUAH=0;rows.forEach(function(r){var u=r[1]*1000*44.9;if(u>maxUAH)maxUAH=u;});
+ var T=ticks(conv(maxUAH),6),pw=W-pl-pr,sx=pw/T.max,n=rows.length,rh=(H-pt-pb)/n,bh=rh*0.56,s=svgEl(W,H);
+ T.arr.forEach(function(v){var x=pl+v*sx;s+='<line x1="'+x.toFixed(1)+'" y1="'+pt+'" x2="'+x.toFixed(1)+'" y2="'+base+'" stroke="'+C.grid+'"/>';s+=txt(x,base+18,axfmt(v),{size:10.5});});
+ var xt=pl+conv(thrUAH)*sx;
+ s+='<line x1="'+xt.toFixed(1)+'" y1="'+(pt-6)+'" x2="'+xt.toFixed(1)+'" y2="'+base+'" stroke="'+C.ink+'" stroke-width="1.4" stroke-dasharray="5 4"/>';
+ s+=txt(xt,pt-10,'стеля ≈ '+(cur==='UAH'?grp(conv(thrUAH))+' грн':SYM[cur]+grp(conv(thrUAH))),{size:10.5,weight:600,fill:C.ink});
+ rows.forEach(function(r,i){var uah=r[1]*1000*44.9,y=pt+i*rh+(rh-bh)/2,w=conv(uah)*sx;
+   var col=uah<=thrUAH?C.sage:(uah<=thrUAH*1.1?C.ochre:C.clay);
+   s+='<rect x="'+pl+'" y="'+y.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+bh.toFixed(1)+'" rx="2" fill="'+col+'"/>';
+   s+=txt(pl-8,y+bh/2+4,r[0],{anchor:'end',size:12.5,fam:'Commissioner,sans-serif',weight:500,fill:C.ink});
+   s+=txt(pl+w+6,y+bh/2+4,axfmt(conv(uah)),{anchor:'start',size:11});});
+ return s+'</svg>';
+}
+
+function chLottery(){
+ var W=720,H=400,pl=58,pb=84,pt=34,base=H-pb,ph=base-pt;
+ var G=[[1880000,[['30р',7926],['20р',10426],['15р',12983]]],
+        [2416740,[['30р',10189],['20р',13403],['15р',16690]]]];
+ var mx=0;G.forEach(function(g){g[1].forEach(function(b){if(conv(b[1])>mx)mx=conv(b[1]);});});
+ var T=ticks(mx,6),sc=ph/T.max,s=svgEl(W,H);
+ T.arr.forEach(function(v){var y=base-v*sc;s+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(W-18)+'" y2="'+y.toFixed(1)+'" stroke="'+C.grid+'"/>';s+=txt(pl-8,y+4,axfmt(v),{anchor:'end'});});
+ s+='<line x1="'+pl+'" y1="'+pt+'" x2="'+pl+'" y2="'+base+'" stroke="#9FB6C4"/>';
+ var cols=['#A9D2DA','#4F93B0','#235E86'],ng=G.length,bw=42,bg=10,gg=60,gw=3*bw+2*bg,tot=ng*gw+(ng-1)*gg,x=pl+((W-pl-26)-tot)/2+6;
+ G.forEach(function(g){var bx=x;g[1].forEach(function(b,bi){var h=conv(b[1])*sc;
+   s+='<rect x="'+bx.toFixed(1)+'" y="'+(base-h).toFixed(1)+'" width="'+bw+'" height="'+h.toFixed(1)+'" rx="2" fill="'+cols[bi]+'"/>';
+   s+=txt(bx+bw/2,base-h-6,grp(conv(b[1])),{size:10.5,weight:600,fill:C.ink});
+   s+=txt(bx+bw/2,base+15,b[0],{size:10.5});bx+=bw+bg;});
+  s+=txt(x+gw/2,base+36,'Кредит '+amtShort(g[0]),{size:12.5,weight:600,fam:'Commissioner,sans-serif',fill:C.ink});x+=gw+gg;});
+ return s+'</svg>';
+}
+
+function renderCharts(){var map={'c-lottery':chLottery,'c-down':chDown,'c-month':chMonth,'c-infl':chInfl,'c-erode':chErode,'c-distr':chDistr};
+ for(var id in map){var el=document.getElementById(id);if(el)el.innerHTML=map[id]();}}
+
+/* ── decision flowchart (Mermaid), amounts follow the currency switch ── */
+function mFmt(a,b){return fmtMoney(a,(typeof b==='number'?b:null));}
+function mermaidDef(){
+ var P=mFmt(2000000), mob=(document.defaultView.innerWidth<=680);
+ var C='classDef dec fill:#10243c,stroke:#7cc3e8,color:#d6ecfb;\nclassDef best fill:#14403a,stroke:#74c9bf,color:#eafaf7;\nclassDef start fill:#123a55,stroke:#8fd0ea,color:#eafaff;\nclass Q1,Q2 dec;\nclass L best;\nclass S start;\n';
+ if(mob){var Pn=(''+P).replace(/\s/g,' ');
+  return 'flowchart TD\n'
+  +'S["<b>Подати на обидві<br/>програми</b>"] --> Q1{"Виграли<br/>лотерею?"}\n'
+  +'Q1 -->|Так| L["<b>Лотерея&nbsp;— 3%</b><br/><small>найдешевше</small>"]\n'
+  +'Q1 -->|"Ні / зараз"| E["<b>«єОселя»&nbsp;— 7%</b><br/><small>гарантовано</small>"]\n'
+  +'E --> Q2{"Скільки грошей<br/>на внесок?"}\n'
+  +'Q2 -->|Мало| PA["<b>План А</b><br/><small>до '+Pn+'</small>"]\n'
+  +'Q2 -->|Достатньо| PB["<b>План Б</b><br/><small>від '+Pn+'</small>"]\n'
+  +C;}
+ var PR=mFmt(2000000,3270000),A=mFmt(120000),D=mFmt(540000);
+ return 'flowchart TD\n'
+ +'S["<b>Подати на обидві програми</b><br/><small>через «Дію», безкоштовно</small>"] --> Q1{"Виграли<br/>в лотереї?"}\n'
+ +'Q1 -->|Так| L["<b>Лотерея — 3%</b><br/><small>найдешевше, внесок від 6%</small>"]\n'
+ +'Q1 -->|"Ні / треба зараз"| E["<b>«єОселя» — 7%</b><br/><small>гарантовано, через банк</small>"]\n'
+ +'E --> Q2{"Скільки маєте<br/>на перший внесок?"}\n'
+ +'Q2 -->|Мало| PA["<b>План А · до '+P+'</b><br/><small>держкомпенсація 70%, свого ~'+A+'</small>"]\n'
+ +'Q2 -->|Достатньо| PB["<b>План Б · '+PR+'</b><br/><small>внесок 20% свій, ~'+D+'</small>"]\n'
+ +C;}
+var __flowBusy=false,__flowPending=false,__flowT;
+function renderFlow(){clearTimeout(__flowT);__flowT=setTimeout(_flowRender,60);}   /* coalesce bursts of calls into one */
+function _flowRender(){
+ if(typeof mermaid==='undefined'||!mermaid.render)return;var el=document.getElementById('flowchart');if(!el)return;
+ if(__flowBusy){__flowPending=true;return;}                                        /* never run two mermaid renders at once (they corrupt each other's label sizing) */
+ __flowBusy=true;
+ try{mermaid.render('fsvg'+Date.now(),mermaidDef()).then(function(r){el.innerHTML=r.svg;__flowBusy=false;if(__flowPending){__flowPending=false;_flowRender();}})
+  .catch(function(){__flowBusy=false;if(__flowPending){__flowPending=false;_flowRender();}});}catch(e){__flowBusy=false;}}
+window.__flowReady=function(){if(typeof mermaid==='undefined')return;try{mermaid.initialize({startOnLoad:false,securityLevel:'loose',theme:'base',themeVariables:{fontFamily:"'Commissioner',system-ui,sans-serif",fontSize:'15px',primaryColor:'#16304f',primaryTextColor:'#e7eef7',primaryBorderColor:'#42607d',lineColor:'#8aa6bd',edgeLabelBackground:'#0e2036'},flowchart:{useMaxWidth:true,htmlLabels:true,curve:'basis',nodeSpacing:14,rankSpacing:30,padding:6}});}catch(e){}renderFlow();var __frt,__lw=document.defaultView.innerWidth;window.addEventListener('resize',function(){var w=document.defaultView.innerWidth;if(w===__lw)return;__lw=w;clearTimeout(__frt);__frt=setTimeout(renderFlow,250);});};
+
+function applyCur(){
+ var ms=document.querySelectorAll('.m');
+ for(var i=0;i<ms.length;i++){var el=ms[i];var a=parseFloat(el.getAttribute('data-uah'));
+  var b2=el.getAttribute('data-uah2');var b=(b2!==null&&b2!=='')?parseFloat(b2):null;el.textContent=fmtMoney(a,b);}
+ var us=document.querySelectorAll('.unit');var uw={UAH:'грн',USD:'USD',EUR:'EUR'}[cur];for(var k=0;k<us.length;k++){us[k].textContent=uw;}
+ var btns=document.querySelectorAll('.curbtns button');
+ for(var j=0;j<btns.length;j++){if(btns[j].getAttribute('data-cur')===cur)btns[j].className='on';else btns[j].className='';}
+ var rn=document.getElementById('rateNote');
+ if(rn){rn.textContent=cur==='UAH'?'курс НБУ ≈ 44,9 ₴/$ · 51,5 ₴/€ (22.06.26)':(cur==='USD'?'1 $ = 44,9 грн (НБУ, 22.06.26)':'1 € = 51,5 грн (НБУ, 22.06.26)');}
+ renderCharts();
+ renderFlow();
+}
+function init(){var btns=document.querySelectorAll('.curbtns button');
+ for(var j=0;j<btns.length;j++){btns[j].addEventListener('click',function(){cur=this.getAttribute('data-cur');applyCur();});}
+ window.addEventListener('message',function(e){if(!e.data)return;
+  if(e.data.rates){if(e.data.rates.USD)RATES.USD=+e.data.rates.USD;if(e.data.rates.EUR)RATES.EUR=+e.data.rates.EUR;applyCur();}
+  if(e.data.setCur&&RATES[e.data.setCur]!==undefined){cur=e.data.setCur;applyCur();}});
+ applyCur();
+ try{if(window.parent!==window)window.parent.postMessage({reportReady:true},'*');}catch(e){}}
+if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
+
+</script>
+<script>(function(){function ph(){try{var h=Math.max(document.body.scrollHeight,document.body.offsetHeight);parent.postMessage({__rh:h},'*');}catch(e){}}window.addEventListener('load',ph);window.addEventListener('load',function(){document.querySelectorAll('table.tbl').forEach(function(t){if(t.parentNode&&t.parentNode.classList.contains('tblscroll'))return;var w=document.createElement('div');w.className='tblscroll';t.parentNode.insertBefore(w,t);w.appendChild(t);});});window.addEventListener('resize',ph);new ResizeObserver(ph).observe(document.body);setInterval(ph,1200);})();</script>
+</body>
+</html>

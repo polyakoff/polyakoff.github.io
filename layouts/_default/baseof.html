@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>{{ partial "head.html" . }}</head>
+<body class="{{ if .IsHome }}home{{ else if eq .Kind "page" }}reading{{ else }}listing{{ end }}">
+  <a class="skip" href="#main">{{ if eq .Site.Language.Lang "uk" }}Перейти до вмісту{{ else }}Skip to content{{ end }}</a>
+  {{ partial "bg.html" . }}
+  {{ partial "topbar.html" . }}
+  <div class="backdrop"></div>
+  <div class="layout">
+    {{ partial "sidebar.html" . }}
+    <div class="main">
+      <main id="main" class="content">{{ block "main" . }}{{ end }}</main>
+      {{ partial "footer.html" . }}
+    </div>
+  </div>
+  <script src="/js/site.js" defer></script>
+</body>
+</html>

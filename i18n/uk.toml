@@ -1,0 +1,14 @@
+[home]
+other = "Головна"
+[blog]
+other = "Блог"
+[all_posts]
+other = "Усі пости"
+[read]
+other = "Читати"
+[menu]
+other = "Меню"
+[published]
+other = "Опубліковано"
+[lang_name]
+other = "UA"

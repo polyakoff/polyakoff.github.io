@@ -1,0 +1,47 @@
+baseURL = "https://artem.im/"
+title = "Artem Poliakoff"
+enableRobotsTXT = true
+enableGitInfo = false
+defaultContentLanguage = "uk"
+defaultContentLanguageInSubdir = false
+
+[pagination]
+  pagerSize = 20
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[languages]
+  [languages.uk]
+    languageName = "Українська"
+    languageCode = "uk-UA"
+    weight = 1
+    title = "Артем Поляков"
+    [languages.uk.params]
+      tagline = "IT-спеціаліст за освітою, офіцер ЗСУ та ветеран. Ласкаво прошу на свій сайт, де пишу про те, що мені цікаво: подорожі, гроші, технології, війну."
+      role = "Артем Поляков"
+      author = "Артем Поляков"
+  [languages.en]
+    languageName = "English"
+    languageCode = "en-US"
+    weight = 2
+    title = "Artem Poliakoff"
+    [languages.en.params]
+      tagline = "An IT specialist by education, an officer and veteran of Ukraine's Armed Forces. Welcome to my timeline, stalker — I write about what I find interesting: travel, money, technology, and war."
+      role = "Artem Poliakoff"
+      author = "Artem Poliakoff"
+
+[params]
+  author = "Artem Poliakov"
+  description = "Особистий блог Артема Полякова"
+  goatcounter = "https://poliakoff.goatcounter.com/count"
+  avatar = "/img/avatar-512.webp"
+  [params.social]
+    threads = "https://www.threads.com/@artem.poliakoff"
+    instagram = "https://instagram.com/artem.poliakoff"
+    facebook = "https://facebook.com/artem.poliakoff"
+    linkedin = "https://www.linkedin.com/in/artem-poliakoff"
+    github = "https://github.com/polyakoff"

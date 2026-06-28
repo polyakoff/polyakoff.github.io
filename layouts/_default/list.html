@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="list-head">
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}{{ . }}{{ end }}
+</div>
+{{ range .Pages.ByDate.Reverse }}
+<a class="post-card" href="{{ .RelPermalink }}">
+  <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+  <h2>{{ .Title }}</h2>
+  <p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 150 }}{{ end }}</p>
+</a>
+{{ else }}
+<p class="tagline">—</p>
+{{ end }}
+{{ end }}

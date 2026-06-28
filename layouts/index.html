@@ -1,0 +1,17 @@
+{{ define "main" }}
+<section class="profile">
+  <img class="profile-avatar" src="/img/avatar-512.webp" srcset="/img/avatar-512.webp 1x, /img/avatar-1024.webp 2x" alt="{{ .Site.Params.author }}" width="148" height="148">
+  <h1>{{ .Site.Params.role | default .Site.Title }}</h1>
+  <p class="tagline">{{ .Site.Params.tagline }}</p>
+  {{ partial "social.html" . }}
+</section>
+{{ with .Content }}<div class="post-content" style="text-align:center;max-width:60ch;margin:0 auto">{{ . }}</div>{{ end }}
+<hr class="hr">
+<h2 style="font-size:22px;margin:0 0 18px">{{ T "blog" }}</h2>
+{{ range first 2 (where .Site.RegularPages "Section" "blog").ByDate.Reverse }}
+<a class="post-card" href="{{ .RelPermalink }}">
+  <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+  <h2>{{ .Title }}</h2>
+</a>
+{{ end }}
+{{ end }}

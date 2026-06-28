@@ -1,0 +1,24 @@
+{{- $blog := .Site.GetPage "/blog" -}}
+<aside class="sidebar">
+  <a class="brand" href="{{ .Site.Home.RelPermalink }}">
+    <img src="/img/avatar-512.webp" alt="{{ .Site.Params.author }}" width="46" height="46">
+    <span class="bn">{{ .Site.Params.role | default .Site.Title }}</span>
+  </a>
+  <nav>
+    <ul class="nav-tree">
+      <li><a href="{{ .Site.Home.RelPermalink }}" class="{{ if .IsHome }}active{{ end }}">{{ T "home" }}</a></li>
+      <li>
+        <a href="{{ with $blog }}{{ .RelPermalink }}{{ else }}/blog/{{ end }}" class="{{ if and (eq .Section "blog") (not .IsPage) }}active{{ end }}">{{ T "blog" }}</a>
+        <ul class="nav-sub">
+          {{- range (where .Site.RegularPages "Section" "blog").ByDate.Reverse -}}
+            <li><a href="{{ .RelPermalink }}" class="{{ if eq $.RelPermalink .RelPermalink }}active{{ end }}">{{ .Title }}</a></li>
+          {{- end -}}
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <div class="side-foot">
+    {{ partial "social.html" . }}
+    {{ partial "lang.html" . }}
+  </div>
+</aside>

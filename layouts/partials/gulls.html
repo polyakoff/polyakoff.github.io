@@ -1,0 +1,27 @@
+<svg class="gulls" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <filter id="gull-ds" x="-24%" y="-24%" width="148%" height="148%">
+      <feDropShadow dx="0" dy="0.35" stdDeviation="0.7" flood-color="#2e5878" flood-opacity="0.42"/>
+    </filter>
+    <!-- one reusable gull; JS clones this into #gull-layer as sparse, random flights -->
+    <g id="gull-proto" class="gull">
+      <g class="wings-perspective">
+        <path class="wing left" d="M50 14 Q34 6 12 10 Q30 11 50 16 Z">
+          <animateTransform attributeName="transform" type="rotate" dur="5s" begin="0s" repeatCount="indefinite"
+            keyTimes="0;0.05;0.11;0.17;0.23;0.29;0.34;0.4;1" calcMode="spline"
+            keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+            values="-2 50 14;-16 50 14;10 50 14;-16 50 14;10 50 14;-16 50 14;6 50 14;-2 50 14;-2 50 14"/>
+        </path>
+        <path class="wing right" d="M50 14 Q66 6 88 10 Q70 11 50 16 Z">
+          <animateTransform attributeName="transform" type="rotate" dur="5s" begin="0s" repeatCount="indefinite"
+            keyTimes="0;0.05;0.11;0.17;0.23;0.29;0.34;0.4;1" calcMode="spline"
+            keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+            values="2 50 14;16 50 14;-10 50 14;16 50 14;-10 50 14;16 50 14;-6 50 14;2 50 14;2 50 14"/>
+        </path>
+      </g>
+      <path class="body" d="M46 13.6 Q50 11.5 54 13.6 Q55.6 15 54 16.6 Q50 18.4 46 16.6 Q44.4 15 46 13.6 Z"/>
+      <path class="tail" d="M47.2 16.1 Q50 18.6 52.8 16.1 Q50 17 47.2 16.1 Z"/>
+    </g>
+  </defs>
+  <g id="gull-layer"></g>
+</svg>

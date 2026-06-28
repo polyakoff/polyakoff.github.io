@@ -1,0 +1,147 @@
+<div class="scene" aria-hidden="true">
+  <div class="sky" id="sky"></div>
+  <div class="deep" id="deep"></div>
+  <div class="stars" id="stars"></div>
+  <div class="lum sun" id="sun"></div>
+  <div class="lum moon" id="moon"><img class="moonface" src="/img/moon.webp?v=4" alt="" aria-hidden="true" width="34" height="34"></div>
+  <div class="gulls-wrap">{{ partial "gulls.html" . }}</div>
+</div>
+<script>
+(function(){var s=document.querySelector('.scene');if(!s)return;
+  var sky=document.getElementById('sky'),deep=document.getElementById('deep'),st=document.getElementById('stars'),sun=document.getElementById('sun'),moon=document.getElementById('moon'),mf=document.querySelector('.moonface');
+  var root=document.documentElement;
+  var sr=5, ss=21, TW=0.03;
+  var DAY='linear-gradient(180deg,#4a93d6 0,#6fb2e6 52vh,#93c8ec 80vh,#bfe1f1 94vh,#d8eef6 100vh)';
+  var DAWN='linear-gradient(180deg,#33406e 0,#4a5a8e 52vh,#8a8ab0 78vh,#bcb4bc 90vh,#d2dee4 100vh)';
+  var DUSK='linear-gradient(180deg,#243160 0,#3a4a7e 52vh,#7a6a92 78vh,#a692a0 90vh,#cdd6da 100vh)';
+  var NIGHT='linear-gradient(180deg,#04061a 0,#0a1838 52vh,#142f54 80vh,#1d3a5e 94vh,#26426a 100vh)';
+  var DAYDEEP='linear-gradient(180deg,#d8eef6 0,#aadbe6 7%,#6fc1d0 16%,#2ba6c0 30%,#1690b0 44%,#0e80a2 58%,#0b6486 74%,#08475f 89%,#052a39 100%)';
+  var NIGHTDEEP='linear-gradient(180deg,#26426a 0,#1d3f5a 8%,#15334a 24%,#0f2a3c 46%,#0a2230 66%,#06151e 100%)';
+  var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function place(el,f){el.style.left=(5+90*f).toFixed(2)+'vw';el.style.top=(84-70*(1-Math.pow(2*f-1,2))).toFixed(2)+'vh';}
+  // moon phase: illuminated fraction + which side (waxing = lit on the right, N. hemisphere)
+  function setPhase(k){
+    var lp=2551442.8,n0=Date.UTC(2000,0,6,18,14,0),frac=((((k.getTime()-n0)/1000)%lp)/lp+1)%1;
+    var illum=(1-Math.cos(2*Math.PI*frac))/2, dir=frac<0.5?-1:1;        // dir<0 waxing
+    var off=dir*illum*38, Rs=19;                                         // shadow circle slides off as it fills
+    var pos=off>=0?('calc(50% + '+off.toFixed(2)+'px)'):('calc(50% - '+(-off).toFixed(2)+'px)');
+    var g='radial-gradient(circle '+Rs+'px at '+pos+' 50%,rgba(0,0,0,0) '+(Rs-1.7)+'px,rgba(0,0,0,.55) '+(Rs-0.4)+'px,#000 '+(Rs+0.6)+'px)';
+    if(mf){mf.style.webkitMaskImage=g; mf.style.maskImage=g;}
+  }
+  var isNight=false;
+  function update(){try{
+    var k=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Kyiv'}));
+    var h=k.getHours()+k.getMinutes()/60+k.getSeconds()/3600;
+    if(h>sr && h<ss){
+      isNight=false; s.classList.remove('night');root.classList.remove('night');
+      var t=(h-sr)/(ss-sr), edge=Math.min(t,1-t), tw=edge<TW;
+      root.classList.toggle('twilight',tw);
+      sky.style.background = tw ? (t<0.5?DAWN:DUSK) : DAY; deep.style.background=DAYDEEP;
+      st.style.opacity = tw?0.35:0;
+      moon.style.display='none'; sun.style.display='block'; place(sun,t);
+    } else {
+      isNight=true; s.classList.add('night');root.classList.add('night');root.classList.remove('twilight');
+      sky.style.background=NIGHT; deep.style.background=NIGHTDEEP; st.style.opacity=1;
+      sun.style.display='none'; moon.style.display='block'; place(moon,((24-ss)+sr ? (h<sr?h+(24-ss):h-ss)/((24-ss)+sr) : .5));
+      setPhase(k);
+    }
+  }catch(e){}}
+  update(); setInterval(update,60000);
+
+  // ===== twinkling stars (generated once; layer faded in at night/twilight) =====
+  (function(){
+    if(!st) return; st.innerHTML='';
+    var n = RM ? 44 : 70;
+    for(var i=0;i<n;i++){
+      var d=document.createElement('i'); d.className='star';
+      var sz=(0.9+Math.random()*1.7);
+      d.style.left=(Math.random()*100).toFixed(2)+'%';
+      d.style.top=(Math.random()*100).toFixed(2)+'%';
+      d.style.width=d.style.height=sz.toFixed(2)+'px';
+      if(RM){ d.style.opacity=(0.55+Math.random()*0.4).toFixed(2); }
+      else{
+        d.style.setProperty('--d',(1.6+Math.random()*2.9).toFixed(2)+'s');
+        d.style.setProperty('--dl',(-Math.random()*5).toFixed(2)+'s');
+        d.style.setProperty('--lo',(0.12+Math.random()*0.26).toFixed(2));
+        d.style.setProperty('--hi',(0.72+Math.random()*0.28).toFixed(2));
+      }
+      st.appendChild(d);
+    }
+  })();
+
+  // ===== random meteors (night only) =====
+  function meteor(){
+    if(document.hidden || !s.classList.contains('night')) return;
+    var m=document.createElement('div'); m.className='shoot';
+    var len=32+Math.random()*56, head=(1.7+len/75).toFixed(1);
+    var goLeft=Math.random()<0.45;
+    var top=(1+Math.random()*42), left=goLeft?(56+Math.random()*40):(Math.random()*44);
+    var deg=goLeft?(130+Math.random()*34):(16+Math.random()*34);
+    var rad=deg*Math.PI/180, dist=13+Math.random()*17;
+    var dx=(dist*Math.cos(rad)).toFixed(1), dy=(dist*Math.sin(rad)).toFixed(1);
+    m.style.width=len.toFixed(0)+'px'; m.style.top=top.toFixed(1)+'vh'; m.style.left=left.toFixed(1)+'vw';
+    m.style.setProperty('--h',head+'px');
+    s.appendChild(m);
+    var a=m.animate([{opacity:0,transform:'translate(0,0) rotate('+deg+'deg)'},{opacity:1,offset:0.16},{opacity:0,transform:'translate('+dx+'vw,'+dy+'vw) rotate('+deg+'deg)'}],{duration:320+Math.random()*380,easing:'linear'});
+    a.onfinish=function(){m.remove();};
+  }
+  function mloop(){ meteor(); setTimeout(mloop, 2500+Math.random()*9000); }
+  if(!RM) setTimeout(mloop, 2500);
+  // hidden tabs pause animations; drop any queued meteors so they don't all replay at once on return
+  document.addEventListener('visibilitychange',function(){ if(document.hidden){ var sh=s.querySelectorAll('.shoot'); for(var i=0;i<sh.length;i++) sh[i].remove(); } });
+
+  // ===== gulls: sparse, random, daytime-only flights that recede to a dot then vanish =====
+  (function(){
+    if(RM) return;
+    var SVGNS='http://www.w3.org/2000/svg';
+    var proto=document.getElementById('gull-proto'), layer=document.getElementById('gull-layer');
+    if(!proto||!layer) return;
+    var CAP=3, active=[], raf=null;
+    function tick(now){
+      for(var i=active.length-1;i>=0;i--){
+        var g=active[i], t=(now-g.t0)/g.dur;
+        if(t>=1){ g.el.remove(); active.splice(i,1); continue; }
+        var et=t*t*(3-2*t);                                // smoothstep: gentle entry/exit, no fast dart
+        var x=g.x0+(g.x1-g.x0)*et;
+        var wob=Math.sin(t*g.bn+g.bp);
+        var y=g.y0+(g.y1-g.y0)*et + wob*g.amp;
+        var sc=g.base/(1+(g.base/0.03-1)*t);               // perspective shrink toward a ~dot
+        var op=t<0.05 ? t/0.05 : (t>0.9 ? (1-(t-0.9)/0.1) : 1);   // hold full, fade only once tiny
+        var rot=g.rot + wob*2;
+        g.el.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+') scale('+sc.toFixed(3)+') rotate('+rot.toFixed(2)+')');
+        g.el.setAttribute('opacity',op.toFixed(3));
+      }
+      raf = active.length ? requestAnimationFrame(tick) : null;
+    }
+    function gull(dir,y0,base,rot){
+      var inst=document.createElementNS(SVGNS,'g'); inst.setAttribute('opacity','0');
+      var inner=document.createElementNS(SVGNS,'g'); inner.setAttribute('transform','translate(-50 -14)');
+      var art=proto.cloneNode(true); art.removeAttribute('id');
+      var ats=art.getElementsByTagName('animateTransform');
+      for(var j=0;j<ats.length;j++){ ats[j].setAttribute('dur',(4.4+Math.random()*2.1).toFixed(2)+'s'); ats[j].setAttribute('begin',(-Math.random()*6).toFixed(2)+'s'); }
+      inner.appendChild(art); inst.appendChild(inner); layer.appendChild(inst);
+      var x0 = dir>0 ? -70 : 1670;
+      active.push({el:inst,t0:performance.now(),dur:30000+Math.random()*18000,
+        x0:x0, x1:x0+dir*(360+Math.random()*380),
+        y0:y0, y1:Math.min(y0+(40+Math.random()*130),470),
+        base:base, rot:rot, amp:4+Math.random()*5, bn:Math.PI*2*(2+Math.random()*2), bp:Math.random()*6.28});
+      if(!raf) raf=requestAnimationFrame(tick);
+    }
+    function flight(){
+      var dir=Math.random()<0.5?1:-1, y0c=90+Math.random()*210, base=0.72+Math.random()*0.5;
+      var r=Math.random(), n = r<0.43?1 : (r<0.85?2:3);
+      n=Math.min(n, CAP-active.length); if(n<=0) return;
+      for(var i=0;i<n;i++){
+        (function(i){ setTimeout(function(){
+          if(isNight||document.hidden||active.length>=CAP) return;
+          gull(dir, y0c+(i-(n-1)/2)*(16+Math.random()*12), base*(0.86+Math.random()*0.28), dir*-4+(Math.random()*4-2));
+        }, i*(450+Math.random()*550)); })(i);
+      }
+    }
+    function sched(){ setTimeout(function(){ if(!isNight && !document.hidden) flight(); sched(); }, 13000+Math.random()*19000); }
+    // on hide, drop active gulls + cancel rAF so none are frozen and replayed when the tab returns
+    document.addEventListener('visibilitychange',function(){ if(document.hidden){ for(var i=0;i<active.length;i++) active[i].el.remove(); active.length=0; if(raf){cancelAnimationFrame(raf);raf=null;} } });
+    sched();
+  })();
+})();
+</script>

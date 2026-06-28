@@ -1,0 +1,9 @@
+# Hugo build output (generated in CI by the Pages workflow)
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp

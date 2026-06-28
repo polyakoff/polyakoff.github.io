@@ -1,0 +1,46 @@
+{{ define "main" }}
+{{ if in .Content "report-embed" }}
+<div class="curbar-top" id="curbarTop">
+  <button class="burger curbar-burger" type="button" aria-label="Меню"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  <span class="lab">Валюта</span>
+  <span class="curbtns"><button type="button" data-cur="UAH" class="on">UAH ₴</button><button type="button" data-cur="USD">USD $</button><button type="button" data-cur="EUR">EUR €</button></span>
+  <span class="rate" id="rateTop">курс НБУ ≈ 44,9 ₴/$ · 51,5 ₴/€ (22.06.26)</span>
+</div>
+{{ end }}
+<article class="post-content">
+  <h1>{{ .Title }}</h1>
+  <div class="post-meta">{{ T "published" }}: {{ .Date.Format "2006-01-02" }} · {{ .Params.readingtime | default .ReadingTime }} {{ T "min" | default "min" }} · {{ .Site.Params.author }}</div>
+  {{ .Content }}
+</article>
+{{ if in .Content "report-embed" }}
+<script>
+(function(){var bar=document.getElementById('curbarTop');if(!bar)return;
+ var rt=document.getElementById('rateTop');
+ var bs=bar.querySelectorAll('.curbtns button');
+ var rate={USD:44.9,EUR:51.5,date:'22.06.26'};   /* last-known fallback */
+ try{var _c=JSON.parse(localStorage.getItem('nbuRate')||'null');if(_c&&_c.USD&&_c.EUR&&_c.date)rate=_c;}catch(e){}
+ var cur='UAH';
+ function nf(x){return (Math.round(x*100)/100).toFixed(2).replace('.',',');}
+ function rateText(c){
+  if(c==='USD')return '1 $ = '+nf(rate.USD)+' грн (НБУ, '+rate.date+')';
+  if(c==='EUR')return '1 € = '+nf(rate.EUR)+' грн (НБУ, '+rate.date+')';
+  return 'курс НБУ ≈ '+nf(rate.USD)+' ₴/$ · '+nf(rate.EUR)+' ₴/€ ('+rate.date+')';}
+ function frame(){return document.querySelector('.report-embed iframe');}
+ function pushRates(){var f=frame();if(f&&f.contentWindow)f.contentWindow.postMessage({rates:{USD:rate.USD,EUR:rate.EUR}},'*');}
+ function refresh(){if(rt)rt.textContent=rateText(cur);}
+ bs.forEach(function(b){b.addEventListener('click',function(){cur=b.getAttribute('data-cur');
+  bs.forEach(function(x){x.className=(x===b)?'on':'';});refresh();
+  var f=frame();if(f&&f.contentWindow)f.contentWindow.postMessage({setCur:cur},'*');});});
+ window.addEventListener('message',function(e){if(e.data&&e.data.reportReady)pushRates();});
+ var f0=frame();if(f0)f0.addEventListener('load',pushRates);
+ /* live daily NBU rate; on any failure keep last-known (Minfin fallback would need an API key) */
+ function applyNBU(arr){var g={};for(var i=0;i<arr.length;i++){var o=arr[i];if(o.cc==='USD'){g.USD=o.rate;g.date=o.exchangedate;}else if(o.cc==='EUR'){g.EUR=o.rate;}}
+  if(g.USD&&g.EUR){rate.USD=g.USD;rate.EUR=g.EUR;if(g.date){var p=g.date.split('.');if(p.length===3)rate.date=p[0]+'.'+p[1]+'.'+p[2].slice(-2);}try{localStorage.setItem('nbuRate',JSON.stringify(rate));}catch(e){}refresh();pushRates();}}
+ fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json').then(function(r){return r.json();}).then(applyNBU).catch(function(){});
+ var stuck=null;function onScroll(){var s=bar.getBoundingClientRect().top<=0.5;if(s!==stuck){stuck=s;bar.classList.toggle('stuck',s);}}
+ window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+ refresh();
+})();
+</script>
+{{ end }}
+{{ end }}

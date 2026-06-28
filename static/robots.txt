@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://artem.im/sitemap.xml

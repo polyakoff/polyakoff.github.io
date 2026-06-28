@@ -1,0 +1,14 @@
+[home]
+other = "Home"
+[blog]
+other = "Blog"
+[all_posts]
+other = "All posts"
+[read]
+other = "Read"
+[menu]
+other = "Menu"
+[published]
+other = "Published"
+[lang_name]
+other = "EN"
