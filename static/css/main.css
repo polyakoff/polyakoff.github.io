@@ -21,12 +21,12 @@ h1,h2,h3{font-family:'Lora',Georgia,serif;line-height:1.18;color:var(--navy);let
 .sky{position:absolute;top:0;left:0;right:0;height:100vh;background:linear-gradient(180deg,#4a93d6 0,#6fb2e6 35vh,#9bd0ee 60vh,#c6e4f1 78vh,#d4edf4 84vh,#a6dce1 89vh,#5fbed0 94vh,#2fb4c8 100vh);transition:background 1.6s}
 .deep{position:absolute;top:100vh;left:0;right:0;bottom:0;background:linear-gradient(180deg,#2fb4c8 0,#1ba6c0 9%,#1391b0 20%,#0e80a2 38%,#0b6486 60%,#08475f 82%,#052a39 100%);transition:background 1.6s}
 .stars{position:absolute;left:0;right:0;top:0;height:46vh;opacity:0;transition:opacity 1.6s}
-.star{position:absolute;border-radius:50%;background:#fff;opacity:.85;box-shadow:0 0 2px rgba(210,230,255,.55);will-change:opacity,transform}
+.star{position:absolute;border-radius:50%;background:#fff;opacity:.85;box-shadow:0 0 2px rgba(210,230,255,.55);will-change:opacity}
 @media(prefers-reduced-motion:no-preference){.star{animation:twinkle var(--d,3s) ease-in-out var(--dl,0s) infinite alternate}}
-@keyframes twinkle{from{opacity:var(--lo,.3);transform:scale(.7)}to{opacity:var(--hi,1);transform:scale(1.15)}}
+@keyframes twinkle{from{opacity:var(--lo,.6)}to{opacity:var(--hi,.95)}}
 /* meteors are spawned by JS (random size/angle/speed); head leads, tail trails along its axis */
-.shoot{position:absolute;height:2px;border-radius:2px;opacity:0;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(190,220,255,.38) 62%,rgba(255,255,255,.92));filter:drop-shadow(0 0 2px rgba(200,225,255,.5))}
-.shoot::after{content:"";position:absolute;right:-1px;top:50%;width:var(--h,4px);height:var(--h,4px);margin-top:calc(var(--h,4px) / -2);border-radius:50%;background:#fff;box-shadow:0 0 calc(var(--h,4px) * 1.6) calc(var(--h,4px) * 0.4) rgba(210,232,255,.8)}
+.shoot{position:absolute;height:1.4px;border-radius:1px;opacity:0;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(198,220,255,.16) 55%,rgba(238,247,255,.92) 100%);filter:drop-shadow(0 0 1.5px rgba(205,228,255,.55))}
+/* meteor head is just the bright end of the streak gradient — no cartoon ball */
 .lum{position:absolute;opacity:0;will-change:left,top,opacity;transition:opacity .8s linear}
 .sun{width:46px;height:46px;border-radius:50%;margin:-23px 0 0 -23px;background:radial-gradient(circle at 50% 50%,#fff7d6,#ffd24d);box-shadow:0 0 55px 16px rgba(255,214,90,.5)}
 .moon{width:34px;height:34px;margin:-17px 0 0 -17px;filter:drop-shadow(0 0 5px rgba(216,228,244,.5)) drop-shadow(0 0 13px rgba(216,228,244,.26))}

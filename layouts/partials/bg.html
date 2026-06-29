@@ -100,9 +100,9 @@
       var s=STARS[i], mag=s[2], el=document.createElement('i'); el.className='star';
       var sz=Math.max(0.8,Math.min(3.2,2.7-0.55*mag));               // brighter star -> bigger
       el.style.width=el.style.height=sz.toFixed(2)+'px'; el.style.display='none';
-      var hi=Math.max(0.5,Math.min(1,1.15-0.2*mag)), lo=Math.max(0.12,hi-0.45);
+      var hi=Math.max(0.55,Math.min(1,1.2-0.18*mag)), lo=Math.max(0.32,hi-(0.10+Math.random()*0.12));   // subtle: dips only ~0.1-0.22 below peak
       if(RM){ el.style.opacity=hi.toFixed(2); }
-      else{ el.style.setProperty('--d',(1.8+Math.random()*3).toFixed(2)+'s'); el.style.setProperty('--dl',(-Math.random()*5).toFixed(2)+'s'); el.style.setProperty('--lo',lo.toFixed(2)); el.style.setProperty('--hi',hi.toFixed(2)); }
+      else{ el.style.setProperty('--d',(2.4+Math.random()*3.2).toFixed(2)+'s'); el.style.setProperty('--dl',(-Math.random()*6).toFixed(2)+'s'); el.style.setProperty('--lo',lo.toFixed(2)); el.style.setProperty('--hi',hi.toFixed(2)); }
       st.appendChild(el); starEls.push({el:el,ra:s[0],dec:s[1]});
     }
   })();
@@ -111,19 +111,19 @@
   function meteor(){
     if(document.hidden || !s.classList.contains('night')) return;
     var m=document.createElement('div'); m.className='shoot';
-    var len=32+Math.random()*56, head=(1.7+len/75).toFixed(1);
-    var goLeft=Math.random()<0.45;
-    var top=(1+Math.random()*42), left=goLeft?(56+Math.random()*40):(Math.random()*44);
-    var deg=goLeft?(130+Math.random()*34):(16+Math.random()*34);
-    var rad=deg*Math.PI/180, dist=13+Math.random()*17;
+    var len=44+Math.random()*90;                         // thin, varied-length streak
+    var goLeft=Math.random()<0.5;
+    var top=(1+Math.random()*40), left=goLeft?(58+Math.random()*38):(Math.random()*42);
+    var deg=goLeft?(126+Math.random()*40):(14+Math.random()*40);
+    var rad=deg*Math.PI/180, dist=12+Math.random()*16;
     var dx=(dist*Math.cos(rad)).toFixed(1), dy=(dist*Math.sin(rad)).toFixed(1);
+    var peak=0.5+Math.random()*0.5;                      // some faint, some bright
     m.style.width=len.toFixed(0)+'px'; m.style.top=top.toFixed(1)+'vh'; m.style.left=left.toFixed(1)+'vw';
-    m.style.setProperty('--h',head+'px');
     s.appendChild(m);
-    var a=m.animate([{opacity:0,transform:'translate(0,0) rotate('+deg+'deg)'},{opacity:1,offset:0.16},{opacity:0,transform:'translate('+dx+'vw,'+dy+'vw) rotate('+deg+'deg)'}],{duration:320+Math.random()*380,easing:'linear'});
+    var a=m.animate([{opacity:0,transform:'translate(0,0) rotate('+deg+'deg)'},{opacity:peak,offset:0.2},{opacity:peak*0.8,offset:0.5},{opacity:0,transform:'translate('+dx+'vw,'+dy+'vw) rotate('+deg+'deg)'}],{duration:260+Math.random()*340,easing:'cubic-bezier(.45,.05,.6,1)'});
     a.onfinish=function(){m.remove();};
   }
-  function mloop(){ meteor(); setTimeout(mloop, 2500+Math.random()*9000); }
+  function mloop(){ meteor(); setTimeout(mloop, 5000+Math.random()*16000); }   // sporadic, less frequent
   if(!RM) setTimeout(mloop, 2500);
   // hidden tabs pause animations; drop any queued meteors so they don't all replay at once on return
   document.addEventListener('visibilitychange',function(){ if(document.hidden){ var sh=s.querySelectorAll('.shoot'); for(var i=0;i<sh.length;i++) sh[i].remove(); } });
