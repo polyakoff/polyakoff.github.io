@@ -18,8 +18,8 @@ h1,h2,h3{font-family:'Lora',Georgia,serif;line-height:1.18;color:var(--navy);let
 
 /* ===== scene (fixed, behind everything) ===== */
 .scene{position:absolute;inset:0;z-index:-3;overflow:hidden;background:#06223a}
-.sky{position:absolute;top:0;left:0;right:0;height:100vh;background:linear-gradient(180deg,#4a93d6 0,#6fb2e6 35vh,#9bd0ee 60vh,#c6e4f1 78vh,#d4edf4 84vh,#a6dce1 89vh,#5fbed0 94vh,#2fb4c8 100vh);transition:background 1.6s}
-.deep{position:absolute;top:100vh;left:0;right:0;bottom:0;background:linear-gradient(180deg,#2fb4c8 0,#1ba6c0 9%,#1391b0 20%,#0e80a2 38%,#0b6486 60%,#08475f 82%,#052a39 100%);transition:background 1.6s}
+.sky{position:absolute;top:0;left:0;right:0;height:135vh;background:linear-gradient(180deg,#4a93d6 0,#6fb2e6 58vh,#8ec5e9 98vh,#bfe1f1 122vh,#dcf0f6 135vh);transition:background 1.6s}
+.deep{position:absolute;top:135vh;left:0;right:0;bottom:0;background:linear-gradient(180deg,#dcf0f6 0,#c2e6f0 8%,#8fcdd8 19%,#46b0c6 33%,#2ba6c0 44%,#1690b0 58%,#0e80a2 70%,#0b6486 82%,#052a39 100%);transition:background 1.6s}
 .stars{position:absolute;left:0;right:0;top:0;height:46vh;opacity:0;transition:opacity 1.6s}
 .star{position:absolute;border-radius:50%;background:#fff;opacity:.85;box-shadow:0 0 2px rgba(210,230,255,.55);will-change:opacity}
 @media(prefers-reduced-motion:no-preference){.star{animation:twinkle var(--d,3s) ease-in-out var(--dl,0s) infinite alternate}}

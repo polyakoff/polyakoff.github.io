@@ -51,12 +51,12 @@
     var raM=Math.atan2(ye,xe), decM=Math.atan2(ze,Math.sqrt(xe*xe+ye*ye));
     return {sun:sun, moon:altaz((lst-raM/r)*r, decM)};
   }
-  var DAY='linear-gradient(180deg,#4a93d6 0,#6fb2e6 52vh,#93c8ec 80vh,#bfe1f1 94vh,#d8eef6 100vh)';
-  var DAWN='linear-gradient(180deg,#33406e 0,#4a5a8e 52vh,#8a8ab0 78vh,#bcb4bc 90vh,#d2dee4 100vh)';
-  var DUSK='linear-gradient(180deg,#243160 0,#3a4a7e 52vh,#7a6a92 78vh,#a692a0 90vh,#cdd6da 100vh)';
-  var NIGHT='linear-gradient(180deg,#04061a 0,#0a1838 52vh,#142f54 80vh,#1d3a5e 94vh,#26426a 100vh)';
-  var DAYDEEP='linear-gradient(180deg,#d8eef6 0,#aadbe6 7%,#6fc1d0 16%,#2ba6c0 30%,#1690b0 44%,#0e80a2 58%,#0b6486 74%,#08475f 89%,#052a39 100%)';
-  var NIGHTDEEP='linear-gradient(180deg,#26426a 0,#1d3f5a 8%,#15334a 24%,#0f2a3c 46%,#0a2230 66%,#06151e 100%)';
+  var DAY='linear-gradient(180deg,#4a93d6 0,#6fb2e6 58vh,#8ec5e9 98vh,#bfe1f1 122vh,#dcf0f6 135vh)';
+  var DAWN='linear-gradient(180deg,#33406e 0,#4a5a8e 58vh,#7e88ac 98vh,#aeb2c4 122vh,#d2dee4 135vh)';
+  var DUSK='linear-gradient(180deg,#243160 0,#3a4a7e 58vh,#6e6790 98vh,#a098ac 122vh,#cdd6da 135vh)';
+  var NIGHT='linear-gradient(180deg,#04061a 0,#0a1838 58vh,#142f54 98vh,#1d3a5e 122vh,#274a6e 135vh)';
+  var DAYDEEP='linear-gradient(180deg,#dcf0f6 0,#c2e6f0 8%,#8fcdd8 19%,#46b0c6 33%,#2ba6c0 44%,#1690b0 58%,#0e80a2 70%,#0b6486 82%,#052a39 100%)';
+  var NIGHTDEEP='linear-gradient(180deg,#274a6e 0,#1a3a56 14%,#102c42 34%,#0a2230 60%,#06151e 100%)';
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function project(p,hor){                                // alt/az -> {left vw, top vh} in the south sector, or null if hidden
     var dx=((p.az-AZC+540)%360)-180;
