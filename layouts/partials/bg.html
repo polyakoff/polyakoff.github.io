@@ -96,8 +96,10 @@
     var SVGNS='http://www.w3.org/2000/svg';
     var proto=document.getElementById('gull-proto'), layer=document.getElementById('gull-layer');
     if(!proto||!layer) return;
-    var CAP=3, active=[], raf=null;
+    var CAP=3, active=[], raf=null, lastNow=0;
     function tick(now){
+      if(lastNow && now-lastNow>200){ var gp=now-lastNow; for(var k=0;k<active.length;k++) active[k].t0+=gp; }  // page stalled/hidden (maximise, fullscreen, tab switch) -> pause instead of jumping to a dot and vanishing
+      lastNow=now;
       for(var i=active.length-1;i>=0;i--){
         var g=active[i], t=(now-g.t0)/g.dur;
         if(t>=1){ g.el.remove(); active.splice(i,1); continue; }
@@ -126,7 +128,7 @@
         x0:x0, x1:x0+dir*(360+Math.random()*380),
         y0:y0, y1:Math.min(y0+(40+Math.random()*130),470),
         base:base, rot:rot, amp:4+Math.random()*5, bn:Math.PI*2*(2+Math.random()*2), bp:Math.random()*6.28});
-      if(!raf) raf=requestAnimationFrame(tick);
+      if(!raf){ lastNow=0; raf=requestAnimationFrame(tick); }
     }
     function flight(){
       var dir=Math.random()<0.5?1:-1, y0c=90+Math.random()*210, base=1.05+Math.random()*0.65;
@@ -135,16 +137,13 @@
       for(var i=0;i<n;i++){
         (function(i){ setTimeout(function(){
           if(isNight||document.hidden||active.length>=CAP) return;
-          gull(dir, y0c+(i-(n-1)/2)*(16+Math.random()*12), base*(0.86+Math.random()*0.28), dir*-4+(Math.random()*4-2));
+          gull(dir, y0c+(i-(n-1)/2)*(16+Math.random()*12), base*(0.96+Math.random()*0.08), dir*-4+(Math.random()*4-2));
         }, i*(450+Math.random()*550)); })(i);
       }
     }
     var schedT;
     function sched(d){ clearTimeout(schedT); schedT=setTimeout(function(){ if(!isNight && !document.hidden) flight(); sched(10000+Math.random()*12000); }, d); }
-    document.addEventListener('visibilitychange',function(){
-      if(document.hidden){ for(var i=0;i<active.length;i++) active[i].el.remove(); active.length=0; if(raf){cancelAnimationFrame(raf);raf=null;} }
-      else { sched(1200+Math.random()*2300); }       // returning to the tab → bring a gull back soon
-    });
+    document.addEventListener('visibilitychange',function(){ if(!document.hidden) sched(1200+Math.random()*2300); });  // on return bring a gull soon; existing gulls only paused (not removed) so they survive maximise/fullscreen/refocus
     sched(2000+Math.random()*3000);                  // first gull a few seconds after load, then a calm cadence (10-22s)
   })();
 })();
