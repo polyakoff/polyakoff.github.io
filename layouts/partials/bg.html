@@ -56,6 +56,8 @@
   var DUSK='linear-gradient(180deg,#243160 0,#3a4a7e 58vh,#6e6790 98vh,#a098ac 122vh,#cdd6da 135vh)';
   var NIGHT='linear-gradient(180deg,#04061a 0,#0a1838 58vh,#142f54 98vh,#1d3a5e 122vh,#274a6e 135vh)';
   var DAYDEEP='linear-gradient(180deg,#dcf0f6 0,#c2e6f0 8%,#8fcdd8 19%,#46b0c6 33%,#2ba6c0 44%,#1690b0 58%,#0e80a2 70%,#0b6486 82%,#052a39 100%)';
+  var DAWNDEEP='linear-gradient(180deg,#d2dee4 0,#aabccb 9%,#7d92ac 20%,#566f90 33%,#3d5478 47%,#2a3f60 62%,#1b2c47 78%,#0e1a2e 90%,#07101c 100%)';
+  var DUSKDEEP='linear-gradient(180deg,#cdd6da 0,#a7adc0 9%,#7c7a98 20%,#585577 33%,#403e60 47%,#2d2c49 62%,#1e1d36 78%,#101023 90%,#08081a 100%)';
   var NIGHTDEEP='linear-gradient(180deg,#274a6e 0,#1a3a56 14%,#102c42 34%,#0a2230 60%,#06151e 100%)';
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function project(p,hor){                                // alt/az -> {left vw, top vh} in the south sector, or null if hidden
@@ -80,7 +82,8 @@
     if(alt>-6){
       isNight=false; s.classList.remove('night'); root.classList.remove('night');
       var tw=alt<5; root.classList.toggle('twilight',tw);
-      sky.style.background = tw ? (p.sun.az<180?DAWN:DUSK) : DAY; deep.style.background=DAYDEEP;
+      if(tw){ var dawn=p.sun.az<180; sky.style.background=dawn?DAWN:DUSK; deep.style.background=dawn?DAWNDEEP:DUSKDEEP; }   // sea tracks the sky's mood so the horizon stays seamless
+      else { sky.style.background=DAY; deep.style.background=DAYDEEP; }
     }else{
       isNight=true; s.classList.add('night'); root.classList.add('night'); root.classList.remove('twilight');
       sky.style.background=NIGHT; deep.style.background=NIGHTDEEP;
