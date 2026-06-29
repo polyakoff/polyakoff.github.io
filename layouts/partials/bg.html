@@ -10,7 +10,44 @@
 (function(){var s=document.querySelector('.scene');if(!s)return;
   var sky=document.getElementById('sky'),deep=document.getElementById('deep'),st=document.getElementById('stars'),sun=document.getElementById('sun'),moon=document.getElementById('moon'),mf=document.querySelector('.moonface');
   var root=document.documentElement;
-  var sr=5, ss=21, TW=0.03;
+  // ===== real sun & moon positions as seen from Crimea (Schlyter low-precision ephemeris) =====
+  var LAT=44.95, LON=34.10, RAD=Math.PI/180;            // observer ~ Simferopol, Crimea
+  var AZC=180, AZH=72;                                  // visible window: a due-south +-72deg sector
+  var TOP_HI=6, TOP_LO=42, ALT_REF=66;                  // arc framing (vh): alt 0->TOP_LO, alt>=ALT_REF->TOP_HI
+  function rev(x){return ((x%360)+360)%360;}
+  function altaz(H,dec){                                 // hour angle & dec (rad) -> {alt, az(deg from N, clockwise)}
+    var la=LAT*RAD, sa=Math.sin(la)*Math.sin(dec)+Math.cos(la)*Math.cos(dec)*Math.cos(H), alt=Math.asin(sa);
+    var ca=(Math.sin(dec)-Math.sin(la)*sa)/(Math.cos(la)*Math.cos(alt)); ca=Math.max(-1,Math.min(1,ca));
+    var az=Math.acos(ca)/RAD; if(Math.sin(H)>0) az=360-az;
+    return {alt:alt/RAD, az:az};
+  }
+  function skyPos(ms){                                   // -> {sun:{alt,az}, moon:{alt,az}} from absolute UTC ms
+    var d=ms/86400000-10956.0, ut=((ms/3600000)%24+24)%24, r=RAD;
+    var ws=282.9404+4.70935e-5*d, es=0.016709-1.151e-9*d, Ms=356.0470+0.9856002585*d;
+    var MsR=rev(Ms)*r, Es=MsR+es*Math.sin(MsR)*(1+es*Math.cos(MsR));
+    var vs=Math.atan2(Math.sqrt(1-es*es)*Math.sin(Es),Math.cos(Es)-es), lsun=vs+ws*r;
+    var Ls=rev(Ms+ws), ecl=(23.4393-3.563e-7*d)*r, lst=Ls+180+ut*15+LON;
+    var raS=Math.atan2(Math.sin(lsun)*Math.cos(ecl),Math.cos(lsun)), decS=Math.asin(Math.sin(lsun)*Math.sin(ecl));
+    var sun=altaz((lst-raS/r)*r, decS);
+    var N=125.1228-0.0529538083*d, im=5.1454*r, wm=318.0634+0.1643573223*d, em=0.054900, Mm=115.3654+13.0649929509*d;
+    var Nr=rev(N)*r, wmr=rev(wm)*r, MmR=rev(Mm)*r;
+    var Em=MmR+em*Math.sin(MmR)*(1+em*Math.cos(MmR)); Em=Em-(Em-em*Math.sin(Em)-MmR)/(1-em*Math.cos(Em));
+    var vm=Math.atan2(Math.sqrt(1-em*em)*Math.sin(Em),Math.cos(Em)-em), rm=1-em*Math.cos(Em);
+    var xh=rm*(Math.cos(Nr)*Math.cos(vm+wmr)-Math.sin(Nr)*Math.sin(vm+wmr)*Math.cos(im));
+    var yh=rm*(Math.sin(Nr)*Math.cos(vm+wmr)+Math.cos(Nr)*Math.sin(vm+wmr)*Math.cos(im));
+    var zh=rm*(Math.sin(vm+wmr)*Math.sin(im));
+    var lon=Math.atan2(yh,xh), lat=Math.atan2(zh,Math.sqrt(xh*xh+yh*yh));
+    var LsR=Ls*r, Lm=rev(N+wm+Mm)*r, D=Lm-LsR, F=Lm-Nr, MsR2=rev(Ms)*r;
+    lon+=(-1.274*Math.sin(MmR-2*D)+0.658*Math.sin(2*D)-0.186*Math.sin(MsR2)-0.059*Math.sin(2*MmR-2*D)
+         -0.057*Math.sin(MmR-2*D+MsR2)+0.053*Math.sin(MmR+2*D)+0.046*Math.sin(2*D-MsR2)+0.041*Math.sin(MmR-MsR2)
+         -0.035*Math.sin(D)-0.031*Math.sin(MmR+MsR2)-0.015*Math.sin(2*F-2*D)+0.011*Math.sin(MmR-4*D))*r;
+    lat+=(-0.173*Math.sin(F-2*D)-0.055*Math.sin(MmR-F-2*D)-0.046*Math.sin(MmR+F-2*D)
+         +0.033*Math.sin(F+2*D)+0.017*Math.sin(2*MmR+F))*r;
+    var cb=Math.cos(lat), xg=cb*Math.cos(lon), yg=cb*Math.sin(lon), zg=Math.sin(lat);
+    var xe=xg, ye=yg*Math.cos(ecl)-zg*Math.sin(ecl), ze=yg*Math.sin(ecl)+zg*Math.cos(ecl);
+    var raM=Math.atan2(ye,xe), decM=Math.atan2(ze,Math.sqrt(xe*xe+ye*ye));
+    return {sun:sun, moon:altaz((lst-raM/r)*r, decM)};
+  }
   var DAY='linear-gradient(180deg,#4a93d6 0,#6fb2e6 52vh,#93c8ec 80vh,#bfe1f1 94vh,#d8eef6 100vh)';
   var DAWN='linear-gradient(180deg,#33406e 0,#4a5a8e 52vh,#8a8ab0 78vh,#bcb4bc 90vh,#d2dee4 100vh)';
   var DUSK='linear-gradient(180deg,#243160 0,#3a4a7e 52vh,#7a6a92 78vh,#a692a0 90vh,#cdd6da 100vh)';
@@ -18,7 +55,13 @@
   var DAYDEEP='linear-gradient(180deg,#d8eef6 0,#aadbe6 7%,#6fc1d0 16%,#2ba6c0 30%,#1690b0 44%,#0e80a2 58%,#0b6486 74%,#08475f 89%,#052a39 100%)';
   var NIGHTDEEP='linear-gradient(180deg,#26426a 0,#1d3f5a 8%,#15334a 24%,#0f2a3c 46%,#0a2230 66%,#06151e 100%)';
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function place(el,f){el.style.left=(5+90*f).toFixed(2)+'vw';el.style.top=(84-70*(1-Math.pow(2*f-1,2))).toFixed(2)+'vh';}
+  function skyPlace(el,p){                               // map alt/az into the high south sector; hide if below horizon or outside it
+    var dx=((p.az-AZC+540)%360)-180;                     // signed degrees from due south
+    if(p.alt<=0 || Math.abs(dx)>AZH){ el.style.opacity='0'; return false; }
+    el.style.left=(50+(dx/AZH)*46).toFixed(2)+'vw';      // -AZH..+AZH -> 4..96vw
+    el.style.top=(TOP_LO-Math.min(p.alt,ALT_REF)/ALT_REF*(TOP_LO-TOP_HI)).toFixed(2)+'vh';
+    el.style.opacity='1'; return true;
+  }
   // moon phase: illuminated fraction + which side (waxing = lit on the right, N. hemisphere)
   function setPhase(k){
     var lp=2551442.8,n0=Date.UTC(2000,0,6,18,14,0),frac=((((k.getTime()-n0)/1000)%lp)/lp+1)%1;
@@ -30,23 +73,20 @@
   }
   var isNight=false;
   function update(){try{
-    var k=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Kyiv'}));
-    var h=k.getHours()+k.getMinutes()/60+k.getSeconds()/3600;
-    if(h>sr && h<ss){
-      isNight=false; s.classList.remove('night');root.classList.remove('night');
-      var t=(h-sr)/(ss-sr), edge=Math.min(t,1-t), tw=edge<TW;
-      root.classList.toggle('twilight',tw);
-      sky.style.background = tw ? (t<0.5?DAWN:DUSK) : DAY; deep.style.background=DAYDEEP;
-      st.style.opacity = tw?0.35:0;
-      moon.style.display='none'; sun.style.display='block'; place(sun,t);
-    } else {
-      isNight=true; s.classList.add('night');root.classList.add('night');root.classList.remove('twilight');
-      sky.style.background=NIGHT; deep.style.background=NIGHTDEEP; st.style.opacity=1;
-      sun.style.display='none'; moon.style.display='block'; place(moon,((24-ss)+sr ? (h<sr?h+(24-ss):h-ss)/((24-ss)+sr) : .5));
-      setPhase(k);
+    var ms=Date.now(), p=skyPos(ms), alt=p.sun.alt;
+    if(alt>-6){
+      isNight=false; s.classList.remove('night'); root.classList.remove('night');
+      var tw=alt<5; root.classList.toggle('twilight',tw);
+      sky.style.background = tw ? (p.sun.az<180?DAWN:DUSK) : DAY; deep.style.background=DAYDEEP;
+    }else{
+      isNight=true; s.classList.add('night'); root.classList.add('night'); root.classList.remove('twilight');
+      sky.style.background=NIGHT; deep.style.background=NIGHTDEEP;
     }
+    st.style.opacity=Math.max(0,Math.min(1,(-alt)/8)).toFixed(2);   // stars fade in as the sun sinks
+    skyPlace(sun,p.sun);                                            // sun shown only when up & inside the sector
+    if(alt<-4){ if(skyPlace(moon,p.moon)) setPhase(new Date(ms)); } else moon.style.opacity='0';
   }catch(e){}}
-  update(); setInterval(update,60000);
+  update(); setInterval(update,1000);                               // continuous from real time -> no jump on reload
 
   // ===== twinkling stars (generated once; layer faded in at night/twilight) =====
   (function(){
