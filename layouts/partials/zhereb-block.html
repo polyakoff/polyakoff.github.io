@@ -1,0 +1,48 @@
+{{- /* Live "next draw" block for the «Житло для ВПО» lottery.
+       Reads site.Data.vpo_zhereb (refreshed daily in CI by scripts/fetch-vpo-draws.mjs).
+       Degrades gracefully: if no upcoming stage, shows the latest one + a link to the Fund. */ -}}
+{{- $d := site.Data.vpo_zhereb -}}
+{{- with $d -}}
+{{- $uk := eq site.Language.Lang "uk" -}}
+{{- $today := now.Format "2006-01-02" -}}
+{{- $fmt := "02.01.2006" -}}{{- /* display dates as dd.mm.yyyy (site convention) */ -}}
+{{- $up := .upcoming -}}
+{{- $isUp := false -}}
+{{- with $up -}}{{- if .whenISO -}}{{- if ge .whenISO $today -}}{{- $isUp = true -}}{{- end -}}{{- else -}}{{- $isUp = true -}}{{- end -}}{{- end -}}
+<style>
+.zhereb{background:rgba(255,255,255,.06);border:1px solid rgba(124,195,232,.4);border-radius:14px;padding:20px 22px;margin:26px 0}
+.zhereb .eyebrow{font:600 12px/1 'Inter',system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#9fd0ec;margin:0 0 10px}
+.zhereb .big{font-family:'Lora',Georgia,serif;font-size:clamp(20px,3vw,27px);color:#7fc8f0;font-weight:600;margin:0 0 6px;line-height:1.15}
+.zhereb .when{font-size:18px;color:#eaf3fb;margin:0 0 14px}
+.zhereb .when .stage{color:#bcd6e8;font-size:15px}
+.zhereb .meta{font-size:15.5px;color:#dbeaf4;margin:0 0 14px}
+.zhereb .btns{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 0}
+.zhereb a.btn{display:inline-block;padding:9px 16px;border-radius:10px;font:600 14px/1.2 'Inter',system-ui,sans-serif;text-decoration:none;border:1px solid rgba(124,195,232,.5);color:#dff0fb;transition:border-color .15s,background .15s}
+.zhereb a.btn:hover{border-color:#9fd0ec;background:rgba(255,255,255,.05)}
+.zhereb a.btn.primary{background:#1e5a8c;border-color:#1e5a8c;color:#fff}
+.zhereb a.btn.primary:hover{background:#27689e}
+.zhereb .foot{font-size:12.5px;color:#9fb3c6;margin:16px 0 0;line-height:1.55}
+.zhereb .foot .upd{display:block;margin-top:4px;opacity:.8}
+</style>
+<aside class="zhereb">
+  <p class="eyebrow">{{ if $uk }}Жеребкування для ВПО{{ else }}IDP housing draw{{ end }}</p>
+  {{- if $isUp }}
+  <p class="big">{{ if $uk }}Найближче жеребкування{{ else }}Next draw{{ end }}</p>
+  <p class="when">{{ if $up.whenISO }}{{ time.Format $fmt $up.whenISO }}{{ with $up.whenTime }} {{ if $uk }}о{{ else }}at{{ end }} {{ . }}{{ end }}{{ else }}{{ $up.whenText }}{{ end }}{{ with $up.stage }} <span class="stage">· {{ if $uk }}{{ . }}-й етап{{ else }}stage {{ . }}{{ end }}</span>{{ end }}</p>
+  <div class="btns">
+    {{- with $up.youtube }}<a class="btn primary" href="{{ . }}" target="_blank" rel="noopener">{{ if $uk }}Дивитись трансляцію{{ else }}Watch live{{ end }}</a>{{ end }}
+    <a class="btn" href="{{ $up.url }}" target="_blank" rel="noopener">{{ if $uk }}Деталі та умови{{ else }}Details{{ end }}</a>
+  </div>
+  {{- else }}
+  <p class="big">{{ if $uk }}Нового етапу поки не оголошено{{ else }}No new stage announced yet{{ end }}</p>
+  {{- with .latest }}
+  <p class="meta">{{ if $uk }}Останній відбір — {{ with .stage }}{{ . }}-й етап{{ end }}{{ with .dateISO }}, {{ time.Format $fmt . }}{{ end }}.{{ else }}Most recent — {{ with .stage }}stage {{ . }}{{ end }}{{ with .dateISO }}, {{ time.Format $fmt . }}{{ end }}.{{ end }}</p>
+  <div class="btns">
+    <a class="btn primary" href="{{ .url }}" target="_blank" rel="noopener">{{ if $uk }}Результати останнього етапу{{ else }}Latest results{{ end }}</a>
+    <a class="btn" href="{{ $d.newsUrl }}" target="_blank" rel="noopener">{{ if $uk }}Усі оголошення Фонду{{ else }}All Fund announcements{{ end }}</a>
+  </div>
+  {{- end }}
+  {{- end }}
+  <p class="foot">{{ if $uk }}Фіксованих дат немає: етапи оголошують у міру надходження траншів від міжнародних партнерів (KfW, БРРЄ, МОМ), зазвичай за ~2 тижні до відбору. Сторінка оновлюється щодня із сайту Фонду.{{ else }}There is no fixed calendar: stages are announced as donor tranches (KfW, CEB, IOM) arrive, usually ~2 weeks ahead. This page refreshes daily from the Fund's site.{{ end }}{{ with .updated }}<span class="upd">{{ if $uk }}Оновлено{{ else }}Updated{{ end }}: {{ time.Format $fmt . }}</span>{{ end }}</p>
+</aside>
+{{- end -}}

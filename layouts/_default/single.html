@@ -9,7 +9,7 @@
 {{ end }}
 <article class="post-content">
   <h1>{{ .Title }}</h1>
-  <div class="post-meta">{{ T "published" }}: {{ .Date.Format "2006-01-02" }} · {{ .Params.readingtime | default .ReadingTime }} {{ T "min" | default "min" }} · {{ .Site.Params.author }}</div>
+  <div class="post-meta">{{ T "published" }}: {{ .Date.Format "02.01.2006" }} · {{ .Params.readingtime | default .ReadingTime }} {{ T "min" | default "min" }} · {{ .Site.Params.author }}</div>
   {{ .Content }}
 </article>
 {{ if in .Content "report-embed" }}

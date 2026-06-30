@@ -2,6 +2,8 @@ name: Deploy Hugo site to Pages
 on:
   push:
     branches: ["main"]
+  schedule:
+    - cron: "17 4 * * *"   # daily ~07:17 Kyiv: refresh the VPO draw schedule from the Fund
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,6 +30,9 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Refresh VPO draw schedule (soft-fail)
+        run: node scripts/fetch-vpo-draws.mjs
+        continue-on-error: true
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production

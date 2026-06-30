@@ -5,7 +5,7 @@
 </div>
 {{ range .Pages.ByDate.Reverse }}
 <a class="post-card" href="{{ .RelPermalink }}">
-  <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+  <span class="date">{{ .Date.Format "02.01.2006" }}</span>
   <h2>{{ .Title }}</h2>
   <p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 150 }}{{ end }}</p>
 </a>

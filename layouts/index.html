@@ -8,10 +8,14 @@
 {{ with .Content }}<div class="post-content" style="text-align:center;max-width:60ch;margin:0 auto">{{ . }}</div>{{ end }}
 <hr class="hr">
 <h2 style="font-size:22px;margin:0 0 18px">{{ T "blog" }}</h2>
-{{ range first 2 (where .Site.RegularPages "Section" "blog").ByDate.Reverse }}
+{{ $shown := 0 }}
+{{ range (where .Site.RegularPages "Section" "blog").ByDate.Reverse }}
+{{ if and (lt $shown 2) (ne .Params.home_hide true) }}
+{{ $shown = add $shown 1 }}
 <a class="post-card" href="{{ .RelPermalink }}">
-  <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+  <span class="date">{{ .Date.Format "02.01.2006" }}</span>
   <h2>{{ .Title }}</h2>
 </a>
+{{ end }}
 {{ end }}
 {{ end }}
