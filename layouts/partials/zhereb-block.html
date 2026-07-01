@@ -43,6 +43,6 @@
   </div>
   {{- end }}
   {{- end }}
-  <p class="foot">{{ if $uk }}Фіксованих дат немає: етапи оголошують у міру надходження траншів від міжнародних партнерів (KfW, БРРЄ, МОМ), зазвичай за ~2 тижні до відбору. Сторінка оновлюється щодня із сайту Фонду.{{ else }}There is no fixed calendar: stages are announced as donor tranches (KfW, CEB, IOM) arrive, usually ~2 weeks ahead. This page refreshes daily from the Fund's site.{{ end }}{{ with .updated }}<span class="upd">{{ if $uk }}Оновлено{{ else }}Updated{{ end }}: {{ time.Format $fmt . }}</span>{{ end }}</p>
+  <p class="foot">{{ if $uk }}Фіксованих дат немає: етапи оголошують у міру надходження траншів від міжнародних партнерів (KfW, БРРЄ, МОМ), зазвичай за ~2 тижні до відбору. Дані підтягуються автоматично із сайту Фонду.{{ else }}There is no fixed calendar: stages are announced as donor tranches (KfW, CEB, IOM) arrive, usually ~2 weeks ahead. Data is pulled automatically from the Fund's site.{{ end }}{{ with .checkedAtText }}<span class="upd">{{ if $uk }}Остання перевірка: {{ else }}Last checked: {{ end }}{{ . }}</span>{{ end }}</p>
 </aside>
 {{- end -}}

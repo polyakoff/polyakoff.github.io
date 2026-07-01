@@ -3,7 +3,12 @@ on:
   push:
     branches: ["main"]
   schedule:
-    - cron: "17 4 * * *"   # daily ~07:17 Kyiv: refresh the VPO draw schedule from the Fund
+    # GitHub cron is UTC and DST-unaware — list both offsets; the gate job below
+    # lets through only the one that lands in the 11:00 / 22:00 Kyiv hour today.
+    - cron: "11 8 * * *"    # 11:11 Kyiv in summer (EEST, UTC+3)
+    - cron: "11 9 * * *"    # 11:11 Kyiv in winter (EET,  UTC+2)
+    - cron: "22 19 * * *"   # 22:22 Kyiv in summer
+    - cron: "22 20 * * *"   # 22:22 Kyiv in winter
   workflow_dispatch:
 permissions:
   contents: read
@@ -13,7 +18,23 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 jobs:
+  gate:                                    # DST-aware: a scheduled run proceeds only in the 11:00/22:00 Kyiv hour
+    runs-on: ubuntu-latest
+    outputs:
+      go: ${{ steps.check.outputs.go }}
+    steps:
+      - id: check
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then echo "go=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          H=$(TZ=Europe/Kyiv date +%H)
+          if [ "$H" = "11" ] || [ "$H" = "22" ]; then
+            echo "Kyiv hour $H — proceeding"; echo "go=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Kyiv hour $H — off-DST cron slot, skipping"; echo "go=false" >> "$GITHUB_OUTPUT"
+          fi
   build:
+    needs: gate
+    if: needs.gate.outputs.go == 'true'
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.140.2
